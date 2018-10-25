@@ -1,0 +1,101 @@
+<div class="page__header-container"
+     data-element="page__header-container">
+  <header class="header"
+       data-component="header">
+    <div class="header__logo-container"
+         data-element="header__logo-container">
+     <div class="logo"
+           data-component="logo">
+        <a class="logo__link"
+           data-element="logo__link"
+           href="<%=publicPathBackEnd%>"
+           tabindex="-1">
+        </a>
+        <button class="logo__button"
+                data-element="logo__button"
+                type="button"
+                tabindex="1">
+          <img class="logo__img"
+               data-element="logo__img"
+               src="<%=publicPathFrontEnd%>/img/logo.svg"
+               alt="logo">
+        </button>
+      </div>
+    </div>
+
+    <div class="header__navigation-container"
+         data-element="header__navigation-container">
+      <nav class="navigation-header"
+           data-component="navigation-header">
+
+        <% if (headerButtons.createSpeaker) { %>
+         <div class="navigation-header__button-create-speaker-container"
+              data-element="navigation-header__create-speaker-container">
+           <div class="button-create-speaker button-header"
+                data-component="button-create-speaker">
+             <a class="button-create-speaker__link button-header__link <%=selectButton.createSpeaker%>"
+                data-element="button-create-speaker__link"
+                href="<%=publicPathBackEnd%>/create-speaker">
+               Стать спикером
+             </a>
+           </div>
+         </div>
+        <% } %>
+
+        <div class="navigation-header__button-speakers-container"
+             data-element="navigation-header__button-speakers-container">
+          <div class="button-speakers button-header"
+               data-component="button-speakers">
+            <a class="button-speakers__link button-header__link <%selectButton.speakers%>"
+               data-element="button-speakers__link"
+               href="<%=publicPathBackEnd%>/speakers">
+              Спикеры
+            </a>
+          </div>
+        </div>
+
+        <% if (headerButtons.login) { %>
+          <div class="navigation-header__button-login-container"
+               data-element="navigation-header__button-login-container">
+            <div class="button-login button-header"
+                 data-component="button-login">
+              <a class="button-login__link button-header__link <%=selectButton.login%>"
+                 data-element="button-login__link"
+                 href="<%=publicPathBackEnd%>/login">
+                Вход
+              </a>
+            </div>
+          </div>
+        <% } %>
+
+        <% if (headerButtons.registration) { %>
+          <div class="navigation-header__button-registration-container"
+               data-element="navigation-header__button-registration-container">
+            <div class="button-registration button-header"
+                 data-component="button-registration">
+              <a class="button-registration__link button-header__link <%=selectButton.registration%>"
+                 data-element="button-registration__link"
+                 href="<%=publicPathBackEnd%>/registration">
+                Регистрация
+              </a>
+            </div>
+          </div>
+        <% } %>
+
+        <% if (headerButtons.profileSetings) { %>
+          <div class="navigation-header__button-profile-setings-container"
+               data-element="navigation-header__button-profile-setings-container">
+            <div class="button-profile-setings button-header"
+                 data-component="button-profile-setings">
+              <a class="button-profile-setings__link button-header__link <%=selectButton.registration%>"
+                 data-element="button-profile-setings__link"
+                 href="<%=publicPathBackEnd%>/profile-setings">
+                <%=userName%>
+              </a>
+            </div>
+          </div>
+        <% } %>
+      </nav>
+    </div>
+  </header>
+</div>
