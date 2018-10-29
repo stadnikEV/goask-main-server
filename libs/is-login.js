@@ -1,6 +1,5 @@
-const User = require('../models/user');
 
-module.exports = (req) => {
+module.exports = ({ req, User }) => {
   const promise = new Promise((resolve, reject) => {
     if (!req.session.userId) {
       resolve(false);

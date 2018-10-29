@@ -1,0 +1,45 @@
+<div class="main-section__user-navigation-container"
+     data-element="main-section__user-navigation-container">
+  <nav class="user-navigation"
+       data-component="user-navigation">
+    <% if (userNavigationButtons.sessions) { %>
+    <div class="user-navigation__button-sessions-container user-navigation__button-container"
+         data-element="user-navigation__button-sessions-container">
+      <div class="button-user-navigation-sessions button-user-navigation"
+          data-component="button-user-navigation-sessions">
+       <a class="button-user-navigation-sessions__link button-user-navigation__link <%=selectButton.sessions%>"
+          data-element="button-user-navigation-sessions__link"
+          href="<%=publicPathBackEnd%>/my-sessions">
+         Мои сессии
+       </a>
+      </div>
+    </div>
+    <% } %>
+
+    <% if (userNavigationButtons.requests) { %>
+    <div class="user-navigation__button-requests-container user-navigation__button-container"
+         data-element="user-navigation__button-requests-container">
+      <div class="button-user-navigation-requests button-user-navigation"
+          data-component="button-user-navigation-requests">
+       <a class="button-user-navigation-requests__link button-user-navigation__link <%=selectButton.requests%>"
+          data-element="button-user-navigation-requests__link"
+          href="<%=publicPathBackEnd%>/my-requests">
+         Заявки на вопросы
+       </a>
+      </div>
+    </div>
+    <% } %>
+
+    <div class="user-navigation__button-questions-container user-navigation__button-container"
+         data-element="user-navigation__button-questions-container">
+      <div class="button-user-navigation-questions button-user-navigation"
+          data-component="button-user-navigation-questions">
+       <a class="button-user-navigation-questions__link button-user-navigation__link <%=selectButton.questions%>"
+          data-element="button-user-navigation-questions__link"
+          href="<%=publicPathBackEnd%>/my-questions">
+         Мои вопросы
+       </a>
+      </div>
+    </div>
+  </nav>
+</div>

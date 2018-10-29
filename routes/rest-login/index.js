@@ -12,8 +12,6 @@ module.exports = (req, res, next) => {
     return;
   }
 
-
-
   const email = req.body.email;
   const password = req.body.password;
 
@@ -44,7 +42,7 @@ module.exports = (req, res, next) => {
   })
   .then(() => {
     let { publicPathBackEnd } = getPublicPaths();
-    res.json({ link: `${publicPathBackEnd}/speakers` });
+    res.json({ link: `${publicPathBackEnd}` });
   })
   .catch((err) => {
     next(err);

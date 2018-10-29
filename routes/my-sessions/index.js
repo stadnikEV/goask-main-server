@@ -9,30 +9,30 @@ module.exports = (req, res, next) => {
   isLogin({ req, User })
     .then((user) => {
       if (user) {
-        let userNavigationButtons = {};
-
         if (user.speaker.speakerId) {
-          userNavigationButtons = {
-            sessions: true,
-            requests: true,
-          }
+          res.render('my-sessions', {
+            headerButtons: {
+              login: false,
+              registration: false,
+              profileSetings: true,
+              createSpeaker: !user.speaker.speakerId,
+            },
+            userNavigationButtons: {
+              sessions: true,
+              requests: true,
+            },
+            userName: user.userName,
+            selectButton: {
+              sessions: 'button-user-navigation__link_selected',
+            },
+            publicPathFrontEnd,
+            publicPathBackEnd,
+          });
+          return;
         }
-        res.render('main', {
-          headerButtons: {
-            login: false,
-            registration: false,
-            profileSetings: true,
-            createSpeaker: !user.speaker.speakerId,
-          },
-          userNavigationButtons,
-          userName: user.userName,
-          selectButton: {},
-          publicPathFrontEnd,
-          publicPathBackEnd,
-        });
-        return;
+
       }
-      res.render('main', {
+      res.render('my-sessions', {
         headerButtons: {
           login: true,
           registration: false,

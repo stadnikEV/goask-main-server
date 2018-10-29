@@ -1,6 +1,7 @@
 const isJson = require('../../libs/is-json');
 const HttpError = require('../../error');
 const getPublicPaths = require('../../libs/get-public-paths');
+const mongoose = require('../../libs/mongoose');
 
 
 module.exports = (req, res, next) => {
@@ -30,6 +31,7 @@ module.exports = (req, res, next) => {
     })
     .then(() => {
       const user = new User({
+        _id: new mongoose.Types.ObjectId(),
         email,
         userName,
         password,
@@ -41,7 +43,7 @@ module.exports = (req, res, next) => {
     .then((user) => {
       let { publicPathBackEnd } = getPublicPaths();
       req.session.userId = user._id;
-      res.json({ link: `${publicPathBackEnd}/speakers` });
+      res.json({ link: `${publicPathBackEnd}/sessions` });
     })
     .catch((err) => {
       next(err);

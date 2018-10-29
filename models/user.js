@@ -1,9 +1,12 @@
-var crypto = require('crypto');
+const crypto = require('crypto');
 
-var mongoose = require('../libs/mongoose'),
-Schema = mongoose.Schema;
+const mongoose = require('../libs/mongoose');
+const Schema = mongoose.Schema;
 
-var schema = new Schema({
+const schema = new Schema({
+  _id: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   userName: {
     type: String,
     required: true
@@ -29,6 +32,25 @@ var schema = new Schema({
     type: Date,
     default: Date.now
   },
+  speaker: {
+    speakerId: Number,
+    about: String,
+    firstname: String,
+    lastname: String,
+    category: [
+      {
+        categoryName : String,
+      },
+    ],
+    sessions: [
+      {
+        sessionId: Number,
+        sessionName: String,
+        categoryName: String,
+        sessionDescribe: String,
+      },
+    ],
+  }
 });
 
 schema.methods.encryptPassword = function(password) {

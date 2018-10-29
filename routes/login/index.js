@@ -1,17 +1,19 @@
 const getPublicPaths = require('../../libs/get-public-paths');
 const isLogin = require('../../libs/is-login');
+const User = require('../../models/user');
 
 module.exports = (req, res, next) => {
   let { publicPathFrontEnd, publicPathBackEnd } = getPublicPaths();
 
-  isLogin(req)
+  isLogin({ req, User })
     .then((user) => {
       if (user) {
-        res.render('index', {
+        res.render('main', {
           headerButtons: {
             profile: true,
-            createSpeaker: true,
+            createSpeaker: user.speaker.speakerId,
           },
+          userName: user.userName,
           selectButton: {},
           publicPathFrontEnd,
           publicPathBackEnd,
