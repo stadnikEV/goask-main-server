@@ -32,25 +32,7 @@ const schema = new Schema({
     type: Date,
     default: Date.now
   },
-  speaker: {
-    speakerId: Number,
-    about: String,
-    firstname: String,
-    lastname: String,
-    category: [
-      {
-        categoryName : String,
-      },
-    ],
-    sessions: [
-      {
-        sessionId: Number,
-        sessionName: String,
-        categoryName: String,
-        sessionDescribe: String,
-      },
-    ],
-  }
+  speakerId: Number,
 });
 
 schema.methods.encryptPassword = function(password) {

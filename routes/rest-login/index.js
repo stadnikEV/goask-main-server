@@ -38,6 +38,9 @@ module.exports = (req, res, next) => {
   .then((user) => {
     user.userStatus = 'login';
     req.session.userId = user._id;
+    if (user.speakerId) {
+      req.session.speakerId = user.speakerId;
+    }
     return user.save();
   })
   .then(() => {

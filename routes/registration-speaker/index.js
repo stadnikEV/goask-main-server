@@ -13,17 +13,24 @@ module.exports = (req, res, next) => {
             login: true,
           },
           selectButton: {},
+          userName: user.userName,
+          userNavigationButtons: false,
           publicPathFrontEnd,
           publicPathBackEnd,
         });
         return;
       }
-      if (user.speaker.speakerId) {
+      if (user.speakerId) {
         res.render('main', {
           headerButtons: {
             profileSetings: true,
           },
           selectButton: {},
+          userNavigationButtons: {
+            sessions: true,
+            requests: true,
+          },
+          userName: user.userName,
           publicPathFrontEnd,
           publicPathBackEnd,
         });

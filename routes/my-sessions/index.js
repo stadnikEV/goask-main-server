@@ -9,19 +9,20 @@ module.exports = (req, res, next) => {
   isLogin({ req, User })
     .then((user) => {
       if (user) {
-        if (user.speaker.speakerId) {
+        if (user.speakerId) {
           res.render('my-sessions', {
             headerButtons: {
               login: false,
               registration: false,
               profileSetings: true,
-              createSpeaker: !user.speaker.speakerId,
+              createSpeaker: !user.speakerId,
             },
             userNavigationButtons: {
               sessions: true,
               requests: true,
             },
             userName: user.userName,
+            speakerId: user.speakerId,
             selectButton: {
               sessions: 'button-user-navigation__link_selected',
             },
@@ -32,14 +33,22 @@ module.exports = (req, res, next) => {
         }
 
       }
-      res.render('my-sessions', {
-        headerButtons: {
-          login: true,
-          registration: false,
-          profileSetings: false,
-          createSpeaker: false,
-        },
-        userNavigationButtons: null,
+      const userNavigationButtons = (user)
+        ? {}
+        : false;
+
+      const headerButtons = (user)
+        ? {
+            profileSetings: true,
+            createSpeaker: true,
+          }
+        : {
+            login: true,
+        };
+
+      res.render('main', {
+        headerButtons,
+        userNavigationButtons,
         userName: false,
         selectButton: {},
         publicPathFrontEnd,

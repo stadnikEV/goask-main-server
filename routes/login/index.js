@@ -8,13 +8,22 @@ module.exports = (req, res, next) => {
   isLogin({ req, User })
     .then((user) => {
       if (user) {
+        let userNavigationButtons = {};
+
+        if (user.speakerId) {
+          userNavigationButtons = {
+            sessions: true,
+            requests: true,
+          }
+        }
         res.render('main', {
           headerButtons: {
-            profile: true,
-            createSpeaker: user.speaker.speakerId,
+            profileSetings: true,
+            createSpeaker: !user.speakerId,
           },
           userName: user.userName,
           selectButton: {},
+          userNavigationButtons,
           publicPathFrontEnd,
           publicPathBackEnd,
         });

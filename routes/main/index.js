@@ -10,8 +10,8 @@ module.exports = (req, res, next) => {
     .then((user) => {
       if (user) {
         let userNavigationButtons = {};
-
-        if (user.speaker.speakerId) {
+        
+        if (user.speakerId) {
           userNavigationButtons = {
             sessions: true,
             requests: true,
@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
             login: false,
             registration: false,
             profileSetings: true,
-            createSpeaker: !user.speaker.speakerId,
+            createSpeaker: !user.speakerId,
           },
           userNavigationButtons,
           userName: user.userName,

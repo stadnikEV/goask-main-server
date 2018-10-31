@@ -4,12 +4,11 @@ module.exports = ({ app }) => {
   app.get('/registration', require('./registration'));
   app.get('/registration-speaker', require('./registration-speaker'));
   app.get('/my-sessions', require('./my-sessions'));
+
   app.post('/rest/login', require('./rest-login'));
   app.post('/rest/registration', require('./rest-registration'));
   app.post('/rest/registration-speaker', require('./rest-registration-speaker'));
-  app.get('/rest/user-status', require('./rest-user-status'));
-
-
-  // это тест
-  app.get('/create-speaker/:id', require('./get-speaker'));
+  app.get('/rest/speakers/:id/categories-name', require('./rest-speakers-categories-name'));
+  app.get('/rest/categories-name', require('./rest-categories-name'));
+  // app.get('/rest/speakers/:id/add-session', require('./rest-speakers-add-session'));
 }
