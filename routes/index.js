@@ -10,5 +10,10 @@ module.exports = ({ app }) => {
   app.post('/rest/registration-speaker', require('./rest-registration-speaker'));
   app.get('/rest/speakers/:id/categories-name', require('./rest-speakers-categories-name'));
   app.get('/rest/categories-name', require('./rest-categories-name'));
-  // app.get('/rest/speakers/:id/add-session', require('./rest-speakers-add-session'));
+  app.post('/rest/add-session', require('./rest-add-session'));
+  app.get('/rest/speakers/:id/sessions', require('./rest-speakers-sessions'));
+
+
+  // test
+  app.get('/speakers/:id', require('./speakers'));
 }

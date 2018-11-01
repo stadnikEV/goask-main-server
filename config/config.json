@@ -7,7 +7,7 @@
     "uri": "mongodb://localhost/goask"
   },
   "session": {
-    "secret": "secretWord",
+    "secret": "secretWor",
     "key": "connection.sid",
     "resave": false,
     "saveUninitialized": false,

@@ -24,13 +24,10 @@ var schema = new Schema({
   ],
   sessions: [
     {
-      sessionId: Number,
-      sessionName: String,
-      categoryName: String,
-      sessionDescribe: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'SessionApp',
     },
   ],
-
 });
 
 const Speaker = mongoose.model('Speaker', schema);
