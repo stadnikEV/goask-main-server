@@ -3,6 +3,7 @@ const HttpError = require('../../error');
 const Speaker = require('../../models/speaker');
 const SessionApp = require('../../models/sessionApp');
 const mongoose = require('../../libs/mongoose');
+const getLastSessionId = require('../../libs/get-last-session-id');
 
 
 module.exports = (req, res, next) => {
@@ -25,9 +26,11 @@ module.exports = (req, res, next) => {
           }));
         }
         speakerDB = speaker;
-        return SessionApp.count();
+
+        return getLastSessionId();
       })
-      .then((count) => {
+      .then((lastSessionId) => {
+        console.log(lastSessionId);
         const theme = req.body.theme;
         const describeSession = req.body.describeSession;
         const category = req.body.category;
@@ -49,12 +52,13 @@ module.exports = (req, res, next) => {
 
         const sessionApp = new SessionApp({
           _id: new mongoose.Types.ObjectId(),
-          sessionId: count + 1,
+          sessionId: lastSessionId + 1,
           speaker: speakerDB._id,
           theme,
           describeSession,
           category,
         });
+
         return sessionApp.save();
       })
       .then((sessionApp) => {

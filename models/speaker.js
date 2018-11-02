@@ -28,6 +28,10 @@ var schema = new Schema({
       ref: 'SessionApp',
     },
   ],
+  created: {
+    type: Date,
+    default: Date.now
+  },
 });
 
 const Speaker = mongoose.model('Speaker', schema);

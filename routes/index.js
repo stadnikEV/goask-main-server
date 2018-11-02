@@ -12,8 +12,8 @@ module.exports = ({ app }) => {
   app.get('/rest/categories-name', require('./rest-categories-name'));
   app.post('/rest/add-session', require('./rest-add-session'));
   app.get('/rest/speakers/:id/sessions', require('./rest-speakers-sessions'));
-
+  app.get('/rest/sessions/:id/remove', require('./rest-sessions-remove'));
 
   // test
-  app.get('/speakers/:id', require('./speakers'));
+  app.get('/sessions/:id', require('./sessions'));
 }

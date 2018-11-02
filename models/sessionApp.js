@@ -17,6 +17,10 @@ var schema = new Schema({
   theme: String,
   describeSession: String,
   category: String,
+  created: {
+    type: Date,
+    default: Date.now
+  },
 });
 
 const SessionApp = mongoose.model('SessionApp', schema);

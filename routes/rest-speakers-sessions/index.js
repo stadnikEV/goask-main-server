@@ -2,7 +2,6 @@ const HttpError = require('../../error');
 const Speaker = require('../../models/speaker');
 
 module.exports = (req, res, next) => {
-  console.log(req.params.id);
   Speaker.findOne({ speakerId: req.params.id })
     .populate('sessions')
     .then((speaker) => {
@@ -12,8 +11,19 @@ module.exports = (req, res, next) => {
           message: 'speaker was not found',
         }));
       }
-      const sessions = speaker.sessions;
-      res.json(sessions);
+      let sessions = speaker.sessions;
+      const sessionsResponse = [];
+
+      sessions.forEach((item) => {
+        sessionsResponse.push({
+          sessionId: item.sessionId,
+          theme: item.theme,
+          describeSession: item.describeSession,
+          category: item.category,
+        });
+      });
+
+      res.json(sessionsResponse);
     })
     .catch((e) => {
       next(e);
