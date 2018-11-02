@@ -43,7 +43,7 @@ module.exports = (req, res, next) => {
     .then((user) => {
       let { publicPathBackEnd } = getPublicPaths();
       req.session.userId = user._id;
-      res.json({ link: `${publicPathBackEnd}/sessions` });
+      res.json({ link: `${publicPathBackEnd}` });
     })
     .catch((err) => {
       next(err);

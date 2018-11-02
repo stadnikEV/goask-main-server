@@ -1,8 +1,8 @@
 {
-  "port": "3000",
-  "public-path-front-end": "http://localhost:8080",
-  "public-path-back-end": "http://localhost:3000",
-  "public-path": "http://www.goask.club",
+  "port": "8080",
+  "public-path-front-end": "http://localhost:3000",
+  "public-path-back-end": "http://localhost:8080",
+  "public-path": "http://goask.club",
   "mongoose": {
     "uri": "mongodb://localhost/goask"
   },
