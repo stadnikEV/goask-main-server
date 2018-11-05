@@ -9,14 +9,12 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./libs/mongoose');
-// const headers = require('./middleware/headers');
 
 const app = express();
 app.set('port', config.get('port'));
 
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
-// app.use(headers);
 
 app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'ejs');
@@ -35,6 +33,7 @@ app.use(
 );
 
 require('./routes')({ app });
+require('./api')({ app });
 
 
 app.use(express.static('./public'));

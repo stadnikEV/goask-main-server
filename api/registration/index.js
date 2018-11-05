@@ -1,20 +1,10 @@
-const isJson = require('../../libs/is-json');
 const HttpError = require('../../error');
 const getPublicPaths = require('../../libs/get-public-paths');
 const mongoose = require('../../libs/mongoose');
+const User = require('../../models/user');
 
 
 module.exports = (req, res, next) => {
-  const dataStatus = isJson(req);
-
-  if (!dataStatus.status) {
-    next(dataStatus.httpError);
-    return;
-  }
-
-  const User = require('../../models/user');
-
-
   const email = req.body.email;
   const userName = req.body.userName;
   const password = req.body.password;
@@ -24,7 +14,7 @@ module.exports = (req, res, next) => {
       if (user) {
       return Promise.reject(new HttpError({
           status: 403,
-          message: 'The user was not created',
+          message: 'user with that email address already exists',
         }));
       }
       return user;
@@ -35,12 +25,12 @@ module.exports = (req, res, next) => {
         email,
         userName,
         password,
-        userStatus: 'login',
       });
 
       return user.save();
     })
     .then((user) => {
+      res.status(201);
       let { publicPathBackEnd } = getPublicPaths();
       req.session.userId = user._id;
       res.json({ link: `${publicPathBackEnd}` });

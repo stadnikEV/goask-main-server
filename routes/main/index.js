@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     .then((user) => {
       if (user) {
         let userNavigationButtons = {};
-        
+
         if (user.speakerId) {
           userNavigationButtons = {
             sessions: true,
@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
           headerButtons: {
             login: false,
             registration: false,
-            profileSetings: true,
+            logout: true,
             createSpeaker: !user.speakerId,
           },
           userNavigationButtons,
@@ -36,7 +36,7 @@ module.exports = (req, res, next) => {
         headerButtons: {
           login: true,
           registration: false,
-          profileSetings: false,
+          logout: false,
           createSpeaker: false,
         },
         userNavigationButtons: null,

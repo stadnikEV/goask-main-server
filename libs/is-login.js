@@ -7,7 +7,7 @@ module.exports = ({ req, User }) => {
     }
     User.findById(req.session.userId)
       .then((user) => {
-        if (user.userStatus === 'login') {
+        if (user) {
           resolve(user);
           return;
         }

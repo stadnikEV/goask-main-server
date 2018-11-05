@@ -16,10 +16,6 @@ const schema = new Schema({
     unique: true,
     required: true
   },
-  userStatus: {
-    type: String,
-    required: true
-  },
   hashedPassword: {
     type: String,
     required: true

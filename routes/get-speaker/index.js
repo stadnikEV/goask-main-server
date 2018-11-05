@@ -1,11 +1,4 @@
-// const isJson = require('../../libs/is-json');
-// const HttpError = require('../../error');
-// const getPublicPaths = require('../../libs/get-public-paths');
-// const isLogin = require('../../libs/is-login');
-// const User = require('../../models/user');
 const Speaker = require('../../models/speaker');
-
-
 
 module.exports = (req) => {
   console.log(req.params.id);

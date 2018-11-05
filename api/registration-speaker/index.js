@@ -1,40 +1,19 @@
-const isJson = require('../../libs/is-json');
 const HttpError = require('../../error');
-const isLogin = require('../../libs/is-login');
-const User = require('../../models/user');
 const Speaker = require('../../models/speaker');
 const getPublicPaths = require('../../libs/get-public-paths');
 const mongoose = require('../../libs/mongoose');
 
 
 module.exports = (req, res, next) => {
-  const dataStatus = isJson(req);
-
-  if (!dataStatus.status) {
-    next(dataStatus.httpError);
-    return;
-  }
-
   const createSpeaker = () => {
-    let userDB = null;
+    if (res.locals.user.speakerId) {
+      return Promise.reject(new HttpError({
+        status: 403,
+        message: 'speaker is already exists',
+      }));
+    }
 
-    isLogin({ req, User })
-      .then((user) => {
-        if (!user) {
-          return Promise.reject(new HttpError({
-            status: 403,
-            message: 'user is not authorized',
-          }));
-        }
-        if (user.speakerId) {
-          return Promise.reject(new HttpError({
-            status: 403,
-            message: 'speaker already exists',
-          }));
-        }
-        userDB = user;
-        return Speaker.count();
-      })
+    Speaker.count()
       .then((count) => {
         const firstname = req.body.firstname;
         const lastname = req.body.lastname;
@@ -44,7 +23,7 @@ module.exports = (req, res, next) => {
         const speaker = new Speaker({
           _id: new mongoose.Types.ObjectId(),
           speakerId: count + 1,
-          user: userDB._id,
+          user: res.locals.user._id,
           about,
           firstname,
           lastname,
@@ -57,10 +36,11 @@ module.exports = (req, res, next) => {
         return speaker.save();
       })
       .then((speaker) => {
-        userDB.speakerId = speaker.speakerId;
-        return userDB.save();
+        res.locals.user.speakerId = speaker.speakerId;
+        return res.locals.user.save();
       })
       .then((user) => {
+        res.status(201);
         req.session.userId = user._id;
         req.session.speakerId = user.speakerId;
         let { publicPathBackEnd } = getPublicPaths();

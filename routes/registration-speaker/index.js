@@ -8,37 +8,16 @@ module.exports = (req, res, next) => {
   isLogin({ req, User })
     .then((user) => {
       if (!user) {
-        res.render('main', {
-          headerButtons: {
-            login: true,
-          },
-          selectButton: {},
-          userName: user.userName,
-          userNavigationButtons: false,
-          publicPathFrontEnd,
-          publicPathBackEnd,
-        });
+        res.redirect('/');
         return;
       }
       if (user.speakerId) {
-        res.render('main', {
-          headerButtons: {
-            profileSetings: true,
-          },
-          selectButton: {},
-          userNavigationButtons: {
-            sessions: true,
-            requests: true,
-          },
-          userName: user.userName,
-          publicPathFrontEnd,
-          publicPathBackEnd,
-        });
+        res.redirect('/');
         return;
       }
       res.render('registration-speaker', {
         headerButtons: {
-          profileSetings: true,
+          logout: true,
           createSpeaker: true,
         },
         selectButton: {

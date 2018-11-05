@@ -1,13 +1,14 @@
-const HttpError = require('../error');
+const HttpError = require('../../error');
 
-module.exports = (req) => {
+module.exports = (req, res, next) => {
   let httpError = null;
   if (req.headers['content-type'] !== 'application/json') {
     httpError = new HttpError({
       status: 400,
       message: 'The data is not JSON',
     });
-    return { httpError };
+    next(httpError);
+    return;
   }
-  return { status: true };
+  next();
 }

@@ -1,4 +1,4 @@
-const SessionApp = require('../models/sessionApp');
+const SessionApp = require('../../models/sessionApp');
 
 module.exports = (() => {
   const promise = new Promise((resolve, reject) => {
