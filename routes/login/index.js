@@ -3,24 +3,20 @@ const isLogin = require('../../libs/is-login');
 const User = require('../../models/user');
 
 module.exports = (req, res, next) => {
-  let { publicPathFrontEnd, publicPathBackEnd } = getPublicPaths();
-
   isLogin({ req, User })
     .then((user) => {
       if (user) {
         res.redirect('/');
         return;
       }
-      res.render('login-registration', {
-        page: 'login',
-        headerButtons: {
-          login: true,
+      res.render('pages/page-login', {
+        header: {
+          buttons: {
+            login: true,
+            loginSelect: 'button-header__link_selected',
+          },
         },
-        selectButton: {
-          login: 'button-header__link_selected',
-        },
-        publicPathFrontEnd,
-        publicPathBackEnd,
+        paths: getPublicPaths(),
       });
     })
     .catch((e) => {

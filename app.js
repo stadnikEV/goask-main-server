@@ -32,11 +32,20 @@ app.use(
   })
 );
 
+app.use(require('./middleware/send-http-error'));
+
 require('./routes')({ app });
 require('./api')({ app });
 
 
 app.use(express.static('./public'));
+
+app.use((req, res) => {
+  res.sendHttpError(new HttpError({
+    status: 404,
+    message: 'Page not found',
+  }));
+});
 
 
 /*
@@ -44,16 +53,14 @@ app.use(express.static('./public'));
 */
 
 app.use((err, req, res, next) => {
-  let error = err;
-  logger.error(error.stack);
-  if (error instanceof HttpError) {
-    res.status(error.status);
-    res.json(error);
+  if (err instanceof HttpError) {
+    res.sendHttpError(err);
     return;
   }
-  res.status(500);
-  res.json(new HttpError({
+  logger.error(err.stack);
+  res.sendHttpError(new HttpError({
     status: 500,
+    message: 'server Error',
   }));
 });
 

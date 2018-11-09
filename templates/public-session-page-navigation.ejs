@@ -1,0 +1,93 @@
+<nav class="session-page-navigation"
+     data-component="session-page-navigation">
+  <% if (pageNavigatioData.firstPage) { %>
+    <div class="session-page-navigation__button"
+         data-element="session-page-navigation__button">
+      <a class="session-page-navigation__link"
+         data-element="session-page-navigation__link"
+         href="<%= paths.publicPathBackEnd %>/public-sessions<%=category%>?page=<%=pageNavigatioData.firstPage%>">
+        <%= pageNavigatioData.firstPage %>
+      </a>
+    </div>
+  <% } %>
+
+  <% if (pageNavigatioData.dotsBefore) { %>
+    <div class="session-page-navigation__dots"
+         data-element="session-page-navigation__dots">
+      <%='...'%>
+    </div>
+  <% } %>
+
+  <% if (pageNavigatioData.pagesBefore[0]) { %>
+    <div class="session-page-navigation__button"
+         data-element="session-page-navigation__button">
+      <a class="session-page-navigation__link"
+         data-element="session-page-navigation__link"
+         href="<%= paths.publicPathBackEnd %>/public-sessions<%=category%>?page=<%= pageNavigatioData.pagesBefore[0] %>">
+        <%= pageNavigatioData.pagesBefore[0] %>
+      </a>
+    </div>
+  <% } %>
+
+  <% if (pageNavigatioData.pagesBefore[1]) { %>
+    <div class="session-page-navigation__button"
+         data-element="session-page-navigation__button">
+      <a class="session-page-navigation__link"
+         data-element="session-page-navigation__link"
+         href="<%= paths.publicPathBackEnd %>/public-sessions<%=category%>?page=<%= pageNavigatioData.pagesBefore[1] %>">
+        <%= pageNavigatioData.pagesBefore[1] %>
+      </a>
+    </div>
+  <% } %>
+
+  <% if (pageNavigatioData.currentPage) { %>
+    <div class="session-page-navigation__button"
+         data-element="session-page-navigation__button">
+      <a class="session-page-navigation__link session-page-navigation__link_selected"
+         data-element="session-page-navigation__link"
+         href="#">
+        <%= pageNavigatioData.currentPage %>
+      </a>
+    </div>
+  <% } %>
+
+  <% if (pageNavigatioData.pagesAfter[0]) { %>
+    <div class="session-page-navigation__button"
+         data-element="session-page-navigation__button">
+      <a class="session-page-navigation__link"
+         data-element="session-page-navigation__link"
+         href="<%= paths.publicPathBackEnd %>/public-sessions<%=category%>?page=<%= pageNavigatioData.pagesAfter[0] %>">
+        <%= pageNavigatioData.pagesAfter[0] %>
+      </a>
+    </div>
+  <% } %>
+
+  <% if (pageNavigatioData.pagesAfter[1]) { %>
+    <div class="session-page-navigation__button"
+         data-element="session-page-navigation__button">
+      <a class="session-page-navigation__link"
+         data-element="session-page-navigation__link"
+         href="<%= paths.publicPathBackEnd %>/public-sessions<%=category%>?page=<%= pageNavigatioData.pagesAfter[1] %>">
+        <%= pageNavigatioData.pagesAfter[1] %>
+      </a>
+    </div>
+  <% } %>
+
+  <% if (pageNavigatioData.dotsAfter) { %>
+    <div class="session-page-navigation__dots"
+         data-element="session-page-navigation__dots">
+      <%='...'%>
+    </div>
+  <% } %>
+
+  <% if (pageNavigatioData.lastPage) { %>
+    <div class="session-page-navigation__button"
+         data-element="session-page-navigation__button">
+      <a class="session-page-navigation__link"
+         data-element="session-page-navigation__link"
+         href="<%= paths.publicPathBackEnd %>/public-sessions<%=category%>?page=<%= pageNavigatioData.lastPage %>">
+        <%= pageNavigatioData.lastPage %>
+      </a>
+    </div>
+  <% } %>
+</nav>

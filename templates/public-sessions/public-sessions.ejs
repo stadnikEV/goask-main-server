@@ -1,0 +1,22 @@
+<section class="public-sessions"
+     data-component="public-sessions">
+  <div class="public-sessions__select-category-container">
+    <div class="public-sessions__select-category">
+      <div class="public-sessions__describe-category">
+        Категория
+      </div>
+      <div class="public-sessions__select-container"
+          data-element="public-sessions__select-container">
+      </div>
+    </div>
+  </div>
+
+  <div class="public-sessions__list-container"
+       data-element="public-sessions__list-container">
+    <% include public-session-list %>
+  </div>
+  <div class="public-sessions__page-navigation-container"
+       data-element="public-sessions__page-navigation-container">
+    <% include ../public-session-page-navigation %>
+  </div>
+</section>

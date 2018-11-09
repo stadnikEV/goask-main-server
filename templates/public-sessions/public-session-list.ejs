@@ -1,0 +1,10 @@
+<div class="public-sessions-list"
+     data-component="public-sessions-list">
+  <% sessions.forEach(function(session){ %>
+    <div class="public-sessions-list__item-container"
+         data-element="public-sessions-list__item-container"
+         data-sessionId="<%=session.sessionId%>">
+      <% include public-session-item %>
+    </div>
+  <% }); %>
+</div>

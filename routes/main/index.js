@@ -1,49 +1,37 @@
-
 const getPublicPaths = require('../../libs/get-public-paths');
 const isLogin = require('../../libs/is-login');
 const User = require('../../models/user');
 
 module.exports = (req, res, next) => {
-  let { publicPathFrontEnd, publicPathBackEnd } = getPublicPaths();
-
   isLogin({ req, User })
     .then((user) => {
       if (user) {
-        let userNavigationButtons = {};
-
-        if (user.speakerId) {
-          userNavigationButtons = {
-            sessions: true,
-            requests: true,
-          }
-        }
-        res.render('main', {
-          headerButtons: {
-            login: false,
-            registration: false,
-            logout: true,
-            createSpeaker: !user.speakerId,
+        res.render('pages/page-main.ejs', {
+          header: {
+            buttons: {
+              logout: true,
+              createSpeaker: !user.speakerId,
+            },
           },
-          userNavigationButtons,
+          userNavigation: {
+            buttons: {
+              sessions: user.speakerId,
+              requests: user.speakerId,
+            }
+          },
           userName: user.userName,
-          selectButton: {},
-          publicPathFrontEnd,
-          publicPathBackEnd,
+          paths: getPublicPaths(),
         });
         return;
       }
-      res.render('main', {
-        headerButtons: {
-          login: true,
-          registration: false,
-          logout: false,
-          createSpeaker: false,
+
+      res.render('pages/page-main', {
+        header: {
+          buttons: {
+            login: true,
+          }
         },
-        userNavigationButtons: null,
-        userName: false,
-        selectButton: {},
-        publicPathFrontEnd,
-        publicPathBackEnd,
+        paths: getPublicPaths(),
       });
     })
     .catch((e) => {

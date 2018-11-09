@@ -1,0 +1,20 @@
+<div class="public-session-list-item"
+     data-component="public-session-list-item">
+  <div class="public-session-list-item__navigation"
+       data-element="public-session-list-item__navigation">
+  </div>
+  <div class="public-session-list-item__content"
+       data-element="public-session-list-item__content">
+    <p class="public-session-list-item__theme">
+      <%= session.theme %>
+    </p>
+    <p class="public-session-list-item__speaker">
+      <span>Спикер:</span> <%= session.speaker.firstname %> <%= session.speaker.lastname %>
+    </p>
+
+    <p class="public-session-list-item__describe-session hidden"
+       data-element="public-session-list-item__describe-session">
+      <%= session.describeSession %>
+    </p>
+  </div>
+</div>

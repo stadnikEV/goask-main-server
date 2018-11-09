@@ -4,13 +4,16 @@
 	<meta charset="UTF-8">
 	<title>Goask</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="<%=publicPathFrontEnd%>/js/<%=page%>.js" type="text/javascript" defer></script>
-	<link rel="stylesheet" href="<%=publicPathFrontEnd%>/css/<%=page%>.css">
+	<script src="<%=paths.publicPathFrontEnd%>/js/login.js" type="text/javascript" defer></script>
+	<link rel="stylesheet" href="<%=paths.publicPathFrontEnd%>/css/login.css">
 </head>
 <body>
 	<div class="page"
      data-component="page">
-		<% include header %>
+		<div class="page__header-container"
+ 		     data-element="page__header-container">
+ 			<% include ../header %>
+ 		</div>
 		<main class="page__main-container"
 	        data-element="page__main-container">
 	  </main>

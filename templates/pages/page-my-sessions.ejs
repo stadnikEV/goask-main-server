@@ -3,26 +3,27 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="<%=publicPathFrontEnd%>/js/mySessions.js" type="text/javascript" defer></script>
-	<link rel="stylesheet" href="<%=publicPathFrontEnd%>/css/mySessions.css">
+  <script src="<%=paths.publicPathFrontEnd%>/js/mySessions.js" type="text/javascript" defer></script>
+	<link rel="stylesheet" href="<%=paths.publicPathFrontEnd%>/css/mySessions.css">
 </head>
 <body>
 	<div class="page"
-     data-component="page">
-		<% include header %>
+     	 data-component="page">
+		<div class="page__header-container"
+ 		     data-element="page__header-container">
+ 			<% include ../header %>
+ 		</div>
+
 		<main class="page__main-container"
 	        data-element="page__main-container">
-
 			<section class="page__main-section-container"
 							 data-element="page__main-section-container">
 				<div class="main-section"
 						 data-component="main-section">
-					 <% if (userName) { %>
-	          <div class="main-section__user-name"
-								 data-element="main-section__user-name">
-	          	Вы вошли как <%=userName%>
-	          </div>
-	         <% } %>
+          <div class="main-section__user-name"
+							 data-element="main-section__user-name">
+          	Вы вошли как <%=userName%>
+          </div>
 					<div class="main-section__describe-container"
 							 data-element="main-section__describe-container">
 						<h1 class="main-section__describe-header"
@@ -35,9 +36,10 @@
 						</p>
 					</div>
 				</div>
-				<% if (userNavigationButtons) { %>
-					<% include user-navigation %>
-				<% } %>
+
+					<% if (locals.userNavigation) { %>
+						<% include ../user-navigation %>
+					<% } %>
 			</section>
 
 			<section class="page__my-sessions-container"

@@ -4,8 +4,6 @@ const isLogin = require('../../libs/is-login');
 const User = require('../../models/user');
 
 module.exports = (req, res, next) => {
-  let { publicPathFrontEnd, publicPathBackEnd } = getPublicPaths();
-
   isLogin({ req, User })
     .then((user) => {
       if (!user) {
@@ -16,24 +14,22 @@ module.exports = (req, res, next) => {
         res.redirect('/');
         return;
       }
-      res.render('my-sessions', {
-        headerButtons: {
-          login: false,
-          registration: false,
-          logout: true,
-          createSpeaker: false,
-        },
-        userNavigationButtons: {
-          sessions: true,
-          requests: true,
-        },
+      res.render('pages/page-my-sessions', {
         userName: user.userName,
         speakerId: user.speakerId,
-        selectButton: {
-          sessions: 'button-user-navigation__link_selected',
+        header: {
+          buttons: {
+            logout: true,
+          },
         },
-        publicPathFrontEnd,
-        publicPathBackEnd,
+        userNavigation: {
+          buttons: {
+            sessions: true,
+            requests: true,
+            sessionsSelect: 'button-user-navigation__link_selected',
+          }
+        },
+        paths: getPublicPaths(),
       });
     })
     .catch((e) => {

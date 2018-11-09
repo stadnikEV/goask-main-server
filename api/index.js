@@ -12,6 +12,7 @@ module.exports = ({ app }) => {
   app.post('/api/registration-speaker',
     require('../middleware/api/is-json'),
     require('../middleware/api/is-login'),
+    require('../middleware/api/is-valid-category'),
     require('./registration-speaker'));
 
   app.get('/api/speakers/:id/categories-name', require('./speakers-categories-name'));
@@ -31,7 +32,4 @@ module.exports = ({ app }) => {
     require('../middleware/api/is-speaker'),
     require('../middleware/api/check-access-to-change-session'),
     require('./sessions-remove'));
-
-  // test
-  app.get('/sessions/:id', require('./sessions'));
 }
