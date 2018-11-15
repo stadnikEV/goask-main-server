@@ -10,13 +10,19 @@ var schema = new Schema({
     required: true,
     unique: true,
   },
+  theme: String,
+  describeSession: String,
+  category: String,
   speaker: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Speaker',
   },
-  theme: String,
-  describeSession: String,
-  category: String,
+  questions: [
+    {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Question',
+    },
+  ],
   created: {
     type: Date,
     default: Date.now

@@ -10,10 +10,6 @@ var schema = new Schema({
     required: true,
     unique: true,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
   about: String,
   firstname: String,
   lastname: String,
@@ -22,10 +18,20 @@ var schema = new Schema({
       categoryName : String,
     },
   ],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   sessions: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'SessionApp',
+    },
+  ],
+  questions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Question',
     },
   ],
   created: {

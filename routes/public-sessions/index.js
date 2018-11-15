@@ -4,12 +4,14 @@ const isLogin = require('../../libs/is-login');
 const User = require('../../models/user');
 const getPublicPaths = require('../../libs/get-public-paths');
 const getPagenNavigationData = require('../../libs/get-page-navigation-data');
+const categoriesNameconfig  = require('../../libs/categories-name-config.js');
 
 module.exports = (req, res, next) => {
   const numberPagesInSession = parseInt(config.get('numberPagesInSession'));
   let sessionArray = null;
-  const category = (req.params.category)
-    ? `/${req.params.category}`
+
+  const category = (res.locals.category)
+    ? `category=${res.locals.category}&`
     : '';
 
   const pageNumber = parseInt(res.locals.pageNumber);
@@ -26,6 +28,11 @@ module.exports = (req, res, next) => {
     .populate('speaker')
     .then((sessions) => {
       sessionArray = sessions;
+
+      sessionArray.forEach((session) => {
+        session.categoryName = categoriesNameconfig[session.category];
+      });
+
       return isLogin({ req, User });
     })
     .then((user) => {

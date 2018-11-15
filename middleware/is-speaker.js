@@ -1,5 +1,5 @@
-const Speaker = require('../../models/speaker');
-const HttpError = require('../../error');
+const Speaker = require('../models/speaker');
+const HttpError = require('../error');
 
 module.exports = (req, res, next) => {
   Speaker.findOne({ speakerId: req.session.speakerId })
@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
       if (!speaker) {
         return Promise.reject(new HttpError({
           status: 403,
-          message: 'speaker is not authorized',
+          message: 'Speaker is not authorized',
         }));
       }
       res.locals.speaker = speaker;

@@ -24,6 +24,12 @@ const schema = new Schema({
     type: String,
     required: true
   },
+  questions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Question',
+    }
+  ],
   created: {
     type: Date,
     default: Date.now

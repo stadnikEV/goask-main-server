@@ -1,5 +1,5 @@
-const User = require('../../models/user');
-const HttpError = require('../../error');
+const User = require('../models/user');
+const HttpError = require('../error');
 
 module.exports = (req, res, next) => {
   User.findById(req.session.userId)
@@ -7,10 +7,11 @@ module.exports = (req, res, next) => {
       if (!user) {
         return Promise.reject(new HttpError({
           status: 403,
-          message: 'user is not authorized',
+          message: 'User is not authorized',
         }));
       }
       res.locals.user = user;
+
       next();
     })
     .catch((e) => {
