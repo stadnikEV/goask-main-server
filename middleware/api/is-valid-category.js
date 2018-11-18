@@ -11,6 +11,8 @@ module.exports = (req, res, next) => {
       message: 'Category is not valid',
     });
     next(httpError);
+
+    return;
   }
 
   next();

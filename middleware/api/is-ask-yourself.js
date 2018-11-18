@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
   if (user.speakerId === session.speaker.speakerId) {
     next(new HttpError({
       status: 403,
-      message: 'the question is yourself',
+      message: 'The question is yourself',
     }));
 
     return;

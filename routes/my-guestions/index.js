@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
           buttons: {
             sessions: user.speakerId,
             requests: user.speakerId,
-            questionsSelect: 'button-user-navigation__link_selected',
+            questionsSelect: 'button-user-navigation__button_selected',
           }
         },
         paths: getPublicPaths(),

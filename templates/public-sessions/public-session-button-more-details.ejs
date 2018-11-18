@@ -1,11 +1,11 @@
-<div class="button-session-details"
+<div class="button-main"
      data-component="button-session-details-<%= session.sessionId %>">
-  <a class="button-session-details__link"
-     data-element="button-session-details__link"
+  <a class="button-main__link"
+     data-element="button-session-details-<%= session.sessionId %>__link"
      href="<%= paths.publicPathBackEnd %>/public-sessions/<%= session.sessionId %>">
   </a>
-  <button class="button-session-details__button button button-default"
-          data-element="button-session-details__button"
+  <button class="button-main__button button"
+          data-element="button-session-details-<%= session.sessionId %>__button"
           type="button">
     Подробнее
   </button>

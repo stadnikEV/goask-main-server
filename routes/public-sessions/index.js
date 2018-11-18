@@ -43,7 +43,7 @@ module.exports = (req, res, next) => {
             buttons: {
               createSpeaker: !user.speakerId,
               logout: true,
-              speakersSelect: 'button-header__link_selected',
+              speakersSelect: 'button-header__button_selected',
             },
           },
           userNavigation: {
@@ -66,7 +66,7 @@ module.exports = (req, res, next) => {
         header: {
           buttons: {
             login: true,
-            speakersSelect: 'button-header__link_selected',
+            speakersSelect: 'button-header__button_selected',
           },
         },
         sessions: sessionArray,

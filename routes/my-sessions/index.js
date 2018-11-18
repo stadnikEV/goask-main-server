@@ -26,7 +26,7 @@ module.exports = (req, res, next) => {
           buttons: {
             sessions: true,
             requests: true,
-            sessionsSelect: 'button-user-navigation__link_selected',
+            sessionsSelect: 'button-user-navigation__button_selected',
           }
         },
         paths: getPublicPaths(),

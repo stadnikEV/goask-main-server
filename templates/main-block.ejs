@@ -1,0 +1,30 @@
+<div class="main-block"
+     data-component="main-block">
+
+   <% if (locals.userName) { %>
+    <div class="main-block__user-name-container">
+      <div class="user-name">
+        Вы вошли как <%=userName%>
+      </div>
+    </div>
+   <% } %>
+
+  <div class="main-block__main-describe-block-container">
+    <div class="main-describe-block">
+      <h1 class="main-describe-block__describe-title">
+        Наши специалисты ответят на Ваши вопросы
+      </h1>
+      <p class="main-describe-block__describe-text">
+        более 1000 специлистов всех направлений и уровней
+      </p>
+    </div>
+  </div>
+
+  <% if (locals.userNavigation) { %>
+    <div class="main-block__user-navigation-container"
+         data-element="main-block__user-navigation-container">
+      <% include ./user-navigation %>
+    </div>
+  <% } %>
+
+</div>

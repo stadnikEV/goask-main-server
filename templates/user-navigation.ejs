@@ -1,45 +1,61 @@
-<div class="main-section__user-navigation-container"
-     data-element="main-section__user-navigation-container">
-  <nav class="user-navigation"
-       data-component="user-navigation">
-    <% if (userNavigation.buttons.sessions) { %>
-    <div class="user-navigation__button-sessions-container user-navigation__button-container"
-         data-element="user-navigation__button-sessions-container">
-      <div class="button-user-navigation-sessions button-user-navigation"
-          data-component="button-user-navigation-sessions">
-       <a class="button-user-navigation-sessions__link button-user-navigation__link <%=userNavigation.buttons.sessionsSelect%>"
-          data-element="button-user-navigation-sessions__link"
-          href="<%=paths.publicPathBackEnd%>/my-sessions">
-         Мои сессии
-       </a>
-      </div>
-    </div>
-    <% } %>
+<nav class="user-navigation"
+     data-component="user-navigation">
 
-    <% if (userNavigation.buttons.requests) { %>
-    <div class="user-navigation__button-requests-container user-navigation__button-container"
-         data-element="user-navigation__button-requests-container">
-      <div class="button-user-navigation-requests button-user-navigation"
-          data-component="button-user-navigation-requests">
-       <a class="button-user-navigation-requests__link button-user-navigation__link <%=userNavigation.buttons.requestsSelect%>"
-          data-element="button-user-navigation-requests__link"
-          href="#">
-         Заявки на вопросы
-       </a>
-      </div>
-    </div>
-    <% } %>
+  <% if (userNavigation.buttons.sessions) { %>
+  <div class="user-navigation__button-container"
+       data-element="user-navigation__button-sessions-container">
 
-    <div class="user-navigation__button-questions-container user-navigation__button-container"
-         data-element="user-navigation__button-questions-container">
-      <div class="button-user-navigation-questions button-user-navigation"
-          data-component="button-user-navigation-questions">
-       <a class="button-user-navigation-questions__link button-user-navigation__link <%=userNavigation.buttons.questionsSelect%>"
-          data-element="button-user-navigation-questions__link"
-          href="<%=paths.publicPathBackEnd%>/my-questions">
-         Мои вопросы
-       </a>
-      </div>
+    <div class="button-user-navigation"
+         data-component="button-user-navigation-sessions">
+      <a class="button-user-navigation__link"
+        data-element="button-user-navigation-sessions__link"
+        href="<%=paths.publicPathBackEnd%>/my-sessions">
+      </a>
+      <button class="button-user-navigation__button button <%=userNavigation.buttons.sessionsSelect%>"
+             data-element="button-user-navigation-sessions__button"
+             type="button">
+        Мои сессии
+      </button>
     </div>
-  </nav>
-</div>
+
+  </div>
+  <% } %>
+
+
+  <% if (userNavigation.buttons.requests) { %>
+  <div class="user-navigation__button-container"
+       data-element="user-navigation__button-requests-container">
+
+    <div class="button-user-navigation"
+         data-component="button-user-navigation-requests">
+      <a class="button-user-navigation__link"
+        data-element="button-user-navigation-requests__link"
+        href="#">
+      </a>
+      <button class="button-user-navigation__button button <%=userNavigation.buttons.requestsSelect%>"
+             data-element="button-user-navigation-requests__button"
+             type="button">
+        Заявки на вопросы
+      </button>
+    </div>
+  </div>
+  <% } %>
+
+
+  <div class="user-navigation__button-container"
+       data-element="user-navigation__button-questions-container">
+
+    <div class="button-user-navigation"
+        data-component="button-user-navigation-questions">
+      <a class="button-user-navigation__link"
+        data-element="button-user-navigation-questions__link"
+        href="<%=paths.publicPathBackEnd%>/my-questions">
+      </a>
+      <button class="button-user-navigation__button button <%=userNavigation.buttons.questionsSelect%>"
+             data-element="button-user-navigation-questions__button"
+             type="button">
+        Мои вопросы
+      </button>
+    </div>
+  </div>
+</nav>

@@ -23,45 +23,61 @@
 
   <div class="header__navigation-container"
        data-element="header__navigation-container">
+
     <nav class="navigation-header"
          data-component="navigation-header">
 
       <% if (header.buttons.createSpeaker) { %>
        <div class="navigation-header__button-create-speaker-container"
             data-element="navigation-header__create-speaker-container">
-         <div class="button-create-speaker button-header"
-              data-component="button-create-speaker">
-           <a class="button-create-speaker__link button-header__link <%=header.buttons.createSpeakerSelect%>"
-              data-element="button-create-speaker__link"
-              href="<%=paths.publicPathBackEnd%>/registration-speaker">
-             Стать спикером
-           </a>
-         </div>
+        <div class="button-header"
+             data-component="button-create-speaker">
+          <a class="button-header__link"
+             data-element="button-create-speaker__link"
+             tabindex="-1"
+             href="<%=paths.publicPathBackEnd%>/registration-speaker">
+          </a>
+          <button class="button-header__button button <%=header.buttons.createSpeakerSelect%>"
+                  data-element="button-create-speaker__button"
+                  type="button">
+            Стать спикером
+          </button>
+        </div>
        </div>
       <% } %>
 
       <div class="navigation-header__button-speakers-container"
            data-element="navigation-header__button-speakers-container">
-        <div class="button-speakers button-header"
+        <div class="button-header"
              data-component="button-speakers">
-          <a class="button-speakers__link button-header__link <%=header.buttons.speakersSelect%>"
+          <a class="button-header__link"
              data-element="button-speakers__link"
+             tabindex="-1"
              href="<%=paths.publicPathBackEnd%>/public-sessions">
-            Найти спикера
           </a>
+          <button class="button-header__button button <%=header.buttons.speakersSelect%>"
+                  data-element="button-speakers__button"
+                  type="button">
+            Найти спикера
+          </button>
         </div>
       </div>
 
       <% if (header.buttons.login) { %>
         <div class="navigation-header__button-login-container"
              data-element="navigation-header__button-login-container">
-          <div class="button-login button-header"
+          <div class="button-header"
                data-component="button-login">
-            <a class="button-login__link button-header__link <%=header.buttons.loginSelect%>"
-               data-element="button-login__link"
-               href="<%=paths.publicPathBackEnd%>/login">
-              Вход
+            <a class="button-header__link"
+              data-element="button-login__link"
+              tabindex="-1"
+              href="<%=paths.publicPathBackEnd%>/login">
             </a>
+            <button class="button-header__button button <%=header.buttons.loginSelect%>"
+                   data-element="button-login__button"
+                   type="button">
+             Вход
+            </button>
           </div>
         </div>
       <% } %>
@@ -69,13 +85,18 @@
       <% if (header.buttons.registration) { %>
         <div class="navigation-header__button-registration-container"
              data-element="navigation-header__button-registration-container">
-          <div class="button-registration button-header"
+          <div class="button-header"
                data-component="button-registration">
-            <a class="button-registration__link button-header__link <%=header.buttons.registrationSelect%>"
+            <a class="button-header__link"
                data-element="button-registration__link"
+               tabindex="-1"
                href="<%=paths.publicPathBackEnd%>/registration">
-              Регистрация
             </a>
+            <button class="button-header__button button <%=header.buttons.registrationSelect%>"
+                    data-element="button-registration__button"
+                    type="button">
+              Регистрация
+            </button>
           </div>
         </div>
       <% } %>
@@ -83,14 +104,6 @@
       <% if (header.buttons.logout) { %>
         <div class="navigation-header__button-logout-container"
              data-element="navigation-header__button-logout-container">
-          <div class="button-logout button-header"
-               data-component="button-logout">
-            <a class="button-logout__link button-header__link"
-               data-element="button-logout__link"
-               href="#">
-              Выйти
-            </a>
-          </div>
         </div>
       <% } %>
     </nav>

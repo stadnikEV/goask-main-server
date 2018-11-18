@@ -47,4 +47,9 @@ module.exports = ({ app }) => {
     require('../middleware/is-login'),
     require('../middleware/api/is-valid-request-range'),
     require('./get-questions'));
+
+  app.get('/api/questions/:id',
+    require('../middleware/is-login'),
+    require('../middleware/api/is-my-question'),
+    require('./get-question-details'));
 }
