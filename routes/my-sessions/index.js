@@ -7,11 +7,11 @@ module.exports = (req, res, next) => {
   isLogin({ req, User })
     .then((user) => {
       if (!user) {
-        res.redirect('/');
+        res.redirect('/login');
         return;
       }
       if (!user.speakerId) {
-        res.redirect('/');
+        res.redirect('/login');
         return;
       }
       res.render('pages/page-my-sessions', {

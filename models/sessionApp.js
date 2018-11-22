@@ -10,6 +10,7 @@ var schema = new Schema({
     required: true,
     unique: true,
   },
+  status: String,
   theme: String,
   describeSession: String,
   category: String,

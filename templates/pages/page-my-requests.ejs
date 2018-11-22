@@ -3,15 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="<%=paths.publicPathFrontEnd%>/css/publicSessionDetails.css">
+	<link rel="stylesheet" href="<%=paths.publicPathFrontEnd%>/css/myRequests.css">
 </head>
 <body>
 	<div class="page"
-    	 data-component="page">
+     	 data-component="page">
 		<div class="page__header-container"
  		     data-element="page__header-container">
  			<% include ../header %>
  		</div>
+
 		<main class="page__main-container"
 	        data-element="page__main-container">
 
@@ -20,13 +21,12 @@
 				<% include ../main-block %>
 			</section>
 
-			<section class="page__public-session-details-container"
-			         data-element="page__public-session-details-container">
-				<% include ../public-sessions/public-session-details %>
+			<section class="page__my-requests-container"
+							 data-element="page__my-requests-container">
 			</section>
-
-		</main>
+	  </main>
 	</div>
-	<script src="<%=paths.publicPathFrontEnd%>/js/publicSessionDetails.js" type="text/javascript"></script>
+
+  <script src="<%=paths.publicPathFrontEnd%>/js/myRequests.js" type="text/javascript"></script>
 </body>
 </html>

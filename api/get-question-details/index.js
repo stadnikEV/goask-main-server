@@ -12,9 +12,21 @@ module.exports = (req, res, next) => {
         select: 'firstname lastname about -_id',
       }
     })
-    .then((question) => {
-      const categoryName = categoriesNameconfig[question.session.category];
-      res.json({ categoryName, question });
+    .then((data) => {
+      const response = {
+        categoryName: categoriesNameconfig[data.session.category],
+        question: data.question,
+        status: data.status,
+        aboutSpeaker: data.session.speaker.about,
+        speakerName: [
+          data.session.speaker.firstname,
+          data.session.speaker.lastname,
+        ],
+        sessionTheme: data.session.theme,
+        describeSession: data.session.describeSession,
+      }
+
+      res.json(response);
     })
     .catch((e) => {
       next(e);

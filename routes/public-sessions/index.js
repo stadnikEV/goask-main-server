@@ -14,13 +14,17 @@ module.exports = (req, res, next) => {
     ? `category=${res.locals.category}&`
     : '';
 
-  const pageNumber = parseInt(res.locals.pageNumber);
-  const numberOfPages = parseInt(res.locals.numberOfPages);
+  const pageNumber = res.locals.pageNumber;
+  const numberOfPages = res.locals.numberOfPages;
 
-  const pageNavigatioData = getPagenNavigationData({
-    pageNumber,
-    numberOfPages,
-  });
+  const pageNavigatioData = (numberOfPages > 1)
+    ? getPagenNavigationData({
+        pageNumber,
+        numberOfPages,
+      })
+    : false;
+
+  res.locals.searchRequest.status = 'active';
 
   SessionApp.find(res.locals.searchRequest)
     .skip(numberPagesInSession * (pageNumber - 1))

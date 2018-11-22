@@ -1,4 +1,3 @@
-
 const getPublicPaths = require('../../libs/get-public-paths');
 const isLogin = require('../../libs/is-login');
 const User = require('../../models/user');
@@ -10,19 +9,23 @@ module.exports = (req, res, next) => {
         res.redirect('/login');
         return;
       }
-      res.render('pages/page-my-questions', {
+      if (!user.speakerId) {
+        res.redirect('/login');
+        return;
+      }
+      res.render('pages/page-my-requests', {
         userName: user.userName,
+        speakerId: user.speakerId,
         header: {
           buttons: {
-            createSpeaker: !user.speakerId,
             logout: true,
           },
         },
         userNavigation: {
           buttons: {
-            sessions: user.speakerId,
-            requests: user.speakerId,
-            questionsSelect: 'button-user-navigation__button_selected',
+            sessions: true,
+            requests: true,
+            requestsSelect: 'button-user-navigation__button_selected',
           }
         },
         paths: getPublicPaths(),
@@ -31,4 +34,4 @@ module.exports = (req, res, next) => {
     .catch((e) => {
       next(e);
     });
-}
+};

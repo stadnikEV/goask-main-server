@@ -52,4 +52,15 @@ module.exports = ({ app }) => {
     require('../middleware/is-login'),
     require('../middleware/api/is-my-question'),
     require('./get-question-details'));
+
+  app.get('/api/requests',
+    require('../middleware/is-speaker'),
+    require('../middleware/api/is-valid-request-range'),
+    require('./get-requests'));
+
+  app.put('/api/requests/:id/status',
+    require('../middleware/api/is-json'),
+    require('../middleware/is-speaker'),
+    require('../middleware/api/is-my-request'),
+    require('./reject-question'));
 }

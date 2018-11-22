@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     return;
   }
 
-  SessionApp.findOne({ sessionId })
+  SessionApp.findOne({ sessionId, status: 'active' })
   .populate('speaker')
   .then((session) => {
 

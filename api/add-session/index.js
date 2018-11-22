@@ -14,6 +14,7 @@ module.exports = (req, res, next) => {
         const sessionApp = new SessionApp({
           _id: new mongoose.Types.ObjectId(),
           sessionId: lastSessionId + 1,
+          status: 'active',
           speaker: res.locals.speaker._id,
           theme,
           describeSession,

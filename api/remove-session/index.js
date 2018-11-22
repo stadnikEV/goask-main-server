@@ -1,26 +1,36 @@
-const SessionApp = require('../../models/sessionApp');
+// const SessionApp = require('../../models/sessionApp');
 
 module.exports = (req, res, next) => {
   const sessionApp = res.locals.sessionApp;
-  const speaker = res.locals.speaker;
+  // const speaker = res.locals.speaker;
 
-  const sessionId = sessionApp._id;
+  // const sessionId = sessionApp._id;
 
-  speaker.sessions.forEach((item) => {
-    if (String(item) === String(sessionId)) {
-      speaker.sessions.pull({ _id: String(item) })
-      return;
-    }
-  });
+  // speaker.sessions.forEach((item) => {
+  //   if (String(item) === String(sessionId)) {
+  //     speaker.sessions.pull({ _id: String(item) })
+  //     return;
+  //   }
+  // });
 
-  speaker.save()
-    .then(() => {
-      return SessionApp.remove({ _id: sessionId });
-    })
+  sessionApp.status = 'inactive';
+  sessionApp.save()
     .then(() => {
       res.json({});
     })
     .catch((e) => {
       next(e);
     })
+
+
+  // speaker.save()
+  //   .then(() => {
+  //     return SessionApp.remove({ _id: sessionId });
+  //   })
+  //   .then(() => {
+  //     res.json({});
+  //   })
+  //   .catch((e) => {
+  //     next(e);
+  //   })
 }

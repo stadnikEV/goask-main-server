@@ -14,7 +14,9 @@ module.exports = (req, res, next) => {
     return;
   }
 
-  res.locals.searchRequest = {};
+  res.locals.searchRequest = {
+    status: 'active',
+  };
 
   if (res.locals.category) {
     res.locals.searchRequest.category = res.locals.category;

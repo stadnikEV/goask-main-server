@@ -4,7 +4,7 @@ const HttpError = require('../../error');
 module.exports = (req, res, next) => {
   const sessionId = req.body.sessionId;
 
-  SessionApp.findOne({ sessionId })
+  SessionApp.findOne({ sessionId, status: 'active' })
     .populate('speaker')
     .then((session) => {
       if (!session) {

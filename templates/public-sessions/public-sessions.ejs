@@ -17,6 +17,8 @@
   </div>
   <div class="public-sessions__page-navigation-container"
        data-element="public-sessions__page-navigation-container">
-    <% include ../public-session-page-navigation %>
+    <% if (pageNavigatioData) { %>
+      <% include ../public-session-page-navigation %>
+    <% } %>  
   </div>
 </section>

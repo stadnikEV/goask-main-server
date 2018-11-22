@@ -3,7 +3,12 @@ const Speaker = require('../../models/speaker');
 
 module.exports = (req, res, next) => {
   Speaker.findOne({ speakerId: req.params.id })
-    .populate('sessions', 'sessionId theme describeSession category -_id')
+    .populate({
+      path: 'sessions',
+      match: { status: 'active' },
+
+      select: 'sessionId theme describeSession category -_id',
+    })
     .then((speaker) => {
       if (!speaker) {
         return Promise.reject(new HttpError({

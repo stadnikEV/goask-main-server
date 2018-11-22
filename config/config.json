@@ -4,7 +4,7 @@
   "public-path-back-end": "http://localhost:8080",
   "public-path": "http://goask.club",
   "mongoose": {
-    "uri": "mongodb://localhost/goask"
+    "uri": "mongodb://localhost/goask3"
   },
   "session": {
     "secret": "secretWor",
