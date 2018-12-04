@@ -16,4 +16,10 @@ module.exports = ({ app }) => {
 
   app.get('/my-questions', require('./my-guestions'));
   app.get('/my-requests', require('./my-requests'));
+
+  app.get('/stream/:id',
+    require('../middleware/is-login'),
+    require('../middleware/is-speaker'),
+    require('../middleware/is-my-request'),
+    require('./stream'));
 }

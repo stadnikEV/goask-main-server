@@ -61,6 +61,21 @@ module.exports = ({ app }) => {
   app.put('/api/requests/:id/status',
     require('../middleware/api/is-json'),
     require('../middleware/is-speaker'),
-    require('../middleware/api/is-my-request'),
+    require('../middleware/is-my-request'),
     require('./reject-question'));
+
+  app.post('/api/stream/:id/start',
+    require('../middleware/is-speaker'),
+    require('../middleware/is-my-request'),
+    require('./stream-start'));
+
+  app.post('/api/stream/:id',
+    require('../middleware/is-speaker'),
+    require('../middleware/is-my-request'),
+    require('./stream'));
+
+  app.post('/api/stream/:id/stop',
+    require('../middleware/is-speaker'),
+    require('../middleware/is-my-request'),
+    require('./stream-stop'));
 }

@@ -1,4 +1,4 @@
-const HttpError = require('../../error');
+const HttpError = require('../error');
 
 module.exports = (req, res, next) => {
   const questionId = req.params.id;
@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
   if (!questions.some(isExistId)) {
     const httpError = new HttpError({
       status: 403,
-      message: 'No permission to change question status',
+      message: 'No permissions to modify data',
     });
     next(httpError);
 

@@ -5,14 +5,11 @@ const User = require('../../models/user');
 module.exports = (req, res, next) => {
   isLogin({ req, User })
     .then((user) => {
-      if (!user) {
+      if (!user || !user.speakerId) {
         res.redirect('/login');
         return;
       }
-      if (!user.speakerId) {
-        res.redirect('/login');
-        return;
-      }
+
       res.render('pages/page-my-requests', {
         userName: user.userName,
         speakerId: user.speakerId,
