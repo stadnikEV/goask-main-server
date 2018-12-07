@@ -4,7 +4,6 @@ module.exports = (req, res, next) => {
   const questionId = req.params.id;
   const user = res.locals.user;
   const questions = user.questions;
-
   const isExistId = (id) => {
     return id.toString() === questionId;
   }

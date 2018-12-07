@@ -58,11 +58,18 @@ module.exports = ({ app }) => {
     require('../middleware/api/is-valid-request-range'),
     require('./get-requests'));
 
-  app.put('/api/requests/:id/status',
+  app.put('/api/requests/:id/reject',
     require('../middleware/api/is-json'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
-    require('./reject-question'));
+    require('./set-reject-question'));
+
+  app.put('/api/requests/:id/ready',
+    require('../middleware/api/is-json'),
+    require('../middleware/is-speaker'),
+    require('../middleware/is-my-request'),
+    require('../middleware/is-video-exists'),
+    require('./set-ready-question'));
 
   app.post('/api/stream/:id/start',
     require('../middleware/is-speaker'),

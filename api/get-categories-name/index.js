@@ -1,6 +1,6 @@
 const categoriesNameConfig = require('../../libs/categories-name-config');
 
-module.exports = (reg, res) => {
+module.exports = (req, res) => {
   const result = {
     categories: [],
   };

@@ -3,21 +3,17 @@ const HttpError = require('../../error');
 
 module.exports = (req, res, next) => {
   const speaker = res.locals.speaker;
-  const status = req.body.status;
   const questionId = res.locals.questionId;
-
-  if (status !== 'reject') {
-    next(new HttpError({
-      status: 400,
-      message: 'Not correct status',
-    }));
-
-    return;
-  }
 
   Question.findById(questionId)
     .then((question) => {
-      question.status = status;
+      if (question.status === 'ready') {
+        return Promise.reject(new HttpError({
+          status: 403,
+          message: 'Impossible to reject. The answer has already been sent.',
+        }));
+      }
+      question.status = 'reject';
       return question.save();
     })
     .then(() => {

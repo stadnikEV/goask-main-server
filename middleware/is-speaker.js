@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
 
         return;
       }
+
       res.locals.speaker = speaker;
       next();
     })

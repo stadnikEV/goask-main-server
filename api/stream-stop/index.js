@@ -1,3 +1,4 @@
+const config = require('../../config');
 const httpRequest = require('request-promise-native');
 const getRequestData = require('../../libs/get-request-data');
 const HttpError = require('../../error');
@@ -6,7 +7,11 @@ module.exports = (req, res, next) => {
 
   const questionId = res.locals.questionId;
 
-  getRequestData({ req })
+  getRequestData({
+    req,
+    res,
+    timeout: config.get('maxRequestInterval'),
+  })
     .then((streamData) => {
       return httpRequest.post({
         url: `http://localhost:5000/stream/${questionId}/stop`,

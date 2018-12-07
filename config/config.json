@@ -1,10 +1,10 @@
 {
-  "port": "8080",
+  "port": "80",
   "public-path-front-end": "http://localhost:3000",
   "public-path-back-end": "http://localhost:8080",
   "public-path": "http://goask.club",
   "mongoose": {
-    "uri": "mongodb://localhost/goask3"
+    "uri": "mongodb://localhost/goask"
   },
   "session": {
     "secret": "secretWor",
@@ -17,5 +17,6 @@
       "maxAge": null
     }
   },
-  "numberPagesInSession": "5"
+  "numberPagesInSession": "5",
+  "maxRequestInterval": "4500"
 }

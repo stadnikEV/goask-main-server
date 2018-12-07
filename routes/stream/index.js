@@ -2,7 +2,6 @@ const getPublicPaths = require('../../libs/get-public-paths');
 
 module.exports = (req, res, next) => {
   const user = res.locals.user;
-  // const speaker = res.locals.speaker;
   const questionId = res.locals.questionId;
 
   try {

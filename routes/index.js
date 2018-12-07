@@ -22,4 +22,17 @@ module.exports = ({ app }) => {
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
     require('./stream'));
+
+  app.get('/download-video-speaker/:id',
+    require('../middleware/is-speaker'),
+    require('../middleware/is-my-request'),
+    require('../middleware/is-video-exists'),
+    require('./download-file'));
+
+  app.get('/download-video-user/:id',
+  require('../middleware/is-login'),
+    require('../middleware/api/is-my-question'),
+    require('../middleware/api/is-question-status-ready'),
+    require('../middleware/is-video-exists'),
+    require('./download-file'));
 }

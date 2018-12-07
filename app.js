@@ -55,6 +55,7 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   if (err instanceof HttpError) {
     res.sendHttpError(err);
+    logger.error(err.stack);
     return;
   }
   logger.error(err.stack);
