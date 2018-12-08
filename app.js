@@ -1,5 +1,5 @@
+const ENV = process.env.NODE_ENV;
 const express = require('express');
-const http = require('http');
 const HttpError = require('./error');
 const config = require('./config');
 const morgan = require('morgan');
@@ -10,8 +10,22 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./libs/mongoose');
 
+let port = null;
+
+if (ENV === 'prod') {
+  var https = require('https');
+  const getSSL = require('./libs/get-ssl');
+  var ssl = getSSL();
+  port = config.get('port-prod');
+}
+if (ENV === 'dev') {
+  var http = require('http');
+  port = config.get('port-dev');
+}
+
+
 const app = express();
-app.set('port', config.get('port'));
+app.set('port', port);
 
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
@@ -66,7 +80,13 @@ app.use((err, req, res, next) => {
 });
 
 
-
-http.createServer(app).listen(config.get('port'), () => {
-  logger.info('Express server listening on port ' + config.get('port'));
-});
+if (ENV === 'prod') {
+  https.createServer(ssl, app).listen(port, () => {
+    logger.info('Express server listening on port ' + port);
+  });
+}
+if (ENV === 'dev') {
+  http.createServer(app).listen(port, () => {
+    logger.info('Express server listening on port ' + port);
+  });
+}

@@ -1,10 +1,11 @@
 {
-  "port": "80",
+  "port-prod": "443",
+  "port-dev": "8080",
   "public-path-front-end": "http://localhost:3000",
   "public-path-back-end": "http://localhost:8080",
-  "public-path": "http://goask.club",
+  "public-path": "https://goask.club",
   "mongoose": {
-    "uri": "mongodb://localhost/goask"
+    "uri": "mongodb://localhost/goask3"
   },
   "session": {
     "secret": "secretWor",

@@ -1,7 +1,7 @@
-var winston = require('winston');
-var ENV = process.env.NODE_ENV;
+const winston = require('winston');
+const ENV = process.env.NODE_ENV;
 
-var logger = winston.createLogger({
+const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
   transports: [
