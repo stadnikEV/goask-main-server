@@ -1,5 +1,5 @@
 module.exports = ({ contentType }) => {
-  const allowedContentTypes = ['video/mpeg', 'video/mp4', 'video/webm'];
+  const allowedContentTypes = ['video/mpeg', 'video/mp4', 'video/webm', 'video/quicktime'];
 
   const isExistId = (item) => {
     return item === contentType;

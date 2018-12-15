@@ -1,5 +1,5 @@
 module.exports = ({ extension }) => {
-  const allowedExtensions = ['mp4', 'mpeg', 'webm'];
+  const allowedExtensions = ['mp4', 'mpeg', 'webm', 'MOV'];
 
   const isExistId = (item) => {
     return item === extension;
