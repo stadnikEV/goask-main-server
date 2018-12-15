@@ -1,5 +1,5 @@
-const HttpError = require('../../error');
-const Question = require('../../models/question');
+const HttpError = require('../error');
+const Question = require('../models/question');
 
 module.exports = (req, res, next) => {
   const questionId = req.params.id;

@@ -5,7 +5,6 @@ const getRequestData = require('../../libs/get-request-data');
 const HttpError = require('../../error');
 
 module.exports = (req, res, next) => {
-
   const questionId = res.locals.questionId;
 
   getRequestData({

@@ -10,7 +10,7 @@ module.exports = ({ requests }) => {
       streamId.id.push(item._id);
     });
 
-    httpRequest.post({
+    httpRequest.get({
       url: `http://localhost:5000/status-video`,
       body: JSON.stringify(streamId),
       headers: {

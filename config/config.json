@@ -19,5 +19,8 @@
     }
   },
   "numberPagesInSession": "5",
-  "maxRequestInterval": "4500"
+  "maxRequestInterval": "4500",
+  "downloadVideoPath": "../video",
+  "sslPath": "../ssl",
+  "maxFilesSizeUpload": "1073741824"
 }

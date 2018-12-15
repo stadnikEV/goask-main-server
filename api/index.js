@@ -1,4 +1,4 @@
-module.exports = ({ app }) => {
+module.exports = ({ app, downloadVideo, uploadVideo }) => {
   app.post('/api/login',
     require('../middleware/api/is-json'),
     require('./login'));
@@ -74,6 +74,9 @@ module.exports = ({ app }) => {
   app.post('/api/stream/:id/start',
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
+    require('../middleware/api/is-question-not-ready'),
+    require('../middleware/api/is-video-not-download').bind(null, downloadVideo),
+    require('../middleware/api/is-video-not-upload').bind(null, uploadVideo),
     require('./stream-start'));
 
   app.post('/api/stream/:id',
@@ -85,4 +88,13 @@ module.exports = ({ app }) => {
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
     require('./stream-stop'));
+
+  app.post('/api/upload/:id',
+    require('../middleware/api/is-not-exceeded-file-size'),
+    require('../middleware/is-speaker'),
+    require('../middleware/is-my-request'),
+    require('../middleware/api/is-video-not-download').bind(null, downloadVideo),
+    require('../middleware/api/is-video-not-upload').bind(null, uploadVideo),
+    require('../middleware/is-not-streaming'),
+    require('./upload').bind(null, uploadVideo));
 }

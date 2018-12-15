@@ -6,7 +6,7 @@ module.exports = ({ requests, status }) => {
       return;
     }
     if (status[item._id]) {
-      item.status = status[item._id];
+      item.status = status[item._id].status;
     }
   });
 

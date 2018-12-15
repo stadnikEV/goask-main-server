@@ -3,7 +3,7 @@ const express = require('express');
 const HttpError = require('./error');
 const config = require('./config');
 const morgan = require('morgan');
-const logger = require('./libs/log'); // логирование в консоль
+const logger = require('./libs/log');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -22,6 +22,9 @@ if (ENV === 'dev') {
   var http = require('http');
   port = config.get('port-dev');
 }
+
+const downloadVideo = {};
+const uploadVideo = {};
 
 
 const app = express();
@@ -48,8 +51,8 @@ app.use(
 
 app.use(require('./middleware/send-http-error'));
 
-require('./routes')({ app });
-require('./api')({ app });
+require('./routes')({ app, downloadVideo, uploadVideo });
+require('./api')({ app, downloadVideo, uploadVideo });
 
 
 app.use(express.static('./public'));
