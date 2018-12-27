@@ -1,9 +1,11 @@
 const Question = require('../../models/question');
 const HttpError = require('../../error');
+const deleteVideo = require('../../libs/youtube/delete');
 
-module.exports = (req, res, next) => {
+module.exports = (statusVideo, authYoutube, req, res, next) => {
   const speaker = res.locals.speaker;
   const questionId = res.locals.questionId;
+  let questionDB = null;
 
   Question.findById(questionId)
     .then((question) => {
@@ -13,6 +15,7 @@ module.exports = (req, res, next) => {
           message: 'Impossible to reject. The answer has already been sent.',
         }));
       }
+      questionDB = question;
       question.status = 'reject';
       return question.save();
     })
@@ -28,8 +31,19 @@ module.exports = (req, res, next) => {
     })
     .then(() => {
       res.json({});
+
+      if (!questionDB.statusVideo || !questionDB.statusVideo.id) {
+        return;
+      }
+
+      statusVideo[questionId] = 'deleteYoutubeVideo';
+      return deleteVideo({ authYoutube, id: questionDB.statusVideo.id });
+    })
+    .then(() => {
+      delete statusVideo[questionId];
     })
     .catch((e) => {
+      delete statusVideo[questionId];
       next(e);
     });
 };

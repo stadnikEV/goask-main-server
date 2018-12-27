@@ -12,11 +12,8 @@ module.exports = (req, res, next) => {
         message: 'user is not authorized',
       }));
     }
-    req.session.userId = null;
 
-    if (user.speakerId) {
-      req.session.speakerId = null;
-    }
+    req.session.destroy();
 
     let { publicPathBackEnd } = getPublicPaths();
     res.json({ link: `${publicPathBackEnd}` });

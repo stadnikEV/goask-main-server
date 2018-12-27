@@ -7,6 +7,11 @@ var schema = new Schema({
   },
   question: String,
   status: String,
+  statusVideo: {
+    status: String,
+    id: String,
+    link: String,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

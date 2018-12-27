@@ -1,8 +1,8 @@
 module.exports = ({ extension }) => {
-  const allowedExtensions = ['mp4', 'mpeg', 'webm', 'MOV'];
+  const allowedExtensions = ['mp4', 'mpeg', 'webm', 'mov'];
 
   const isExistId = (item) => {
-    return item === extension;
+    return item === extension.toLowerCase();
   }
 
   if (!allowedExtensions.some(isExistId)) {

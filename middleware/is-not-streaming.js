@@ -1,31 +1,18 @@
-const httpRequest = require('request-promise-native');
 const HttpError = require('../error');
 
-module.exports = (req, res, next) => {
+module.exports = (statusVideo, req, res, next) => {
   const id = req.params.id;
 
-  httpRequest.get({
-    url: `http://localhost:5000/status-video`,
-    body: JSON.stringify({ id: [id] }),
-    headers: {
-      'content-type': 'application/json',
-    },
-  })
-    .then((response) => {
-      const data = JSON.parse(response)[id];
-      if (data) {
-        if (data.status === 'stream' || data.status === 'decode') {
-          return Promise.reject(new HttpError({
-            status: 403,
-            message: 'Video is steaming now',
-          }));
-        }
-      }
+  if (statusVideo[id]) {
+    if (statusVideo[id] === 'streaming') {
+      next(new HttpError({
+        status: 403,
+        message: 'The video is streaming now',
+      }));
 
-      res.locals.statusVideo = data;
-      next();
-    })
-    .catch((e) => {
-      next(e);
-    });
+      return;
+    }
+  }
+
+  next();
 };

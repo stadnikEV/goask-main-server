@@ -1,9 +1,8 @@
 const Question = require('../../models/question');
-const getStatusVideo = require('./get-status-video');
 const addStatusVideo = require('./add-status-video');
 
 
-module.exports = (req, res, next) => {
+module.exports = (statusVideo, req, res, next) => {
   const speaker = res.locals.speaker;
   const params = res.locals.params;
 
@@ -18,21 +17,16 @@ module.exports = (req, res, next) => {
     return;
   }
 
-  let requestsDB = null;
 
-  Question.find({ speaker: speaker._id, status: ['ready', 'pending'] }, ['status', 'question', 'created'])
+  Question.find({ speaker: speaker._id, status: ['ready', 'pending'] }, ['status', 'statusVideo', 'question', 'created'])
     .sort({ created: -1 })
     .skip(params.from - 1)
     .limit(params.to - params.from + 1)
     .populate('session', 'theme -_id')
-    .then((requests) => {
-      requestsDB = requests;
-      return getStatusVideo({ requests });
-    })
-    .then((status) => {
+    .then((requestsDB) => {
       const requests = addStatusVideo({
-        requests: requestsDB,
-        status: status,
+        requestsDB,
+        statusVideo,
       });
 
       res.json({

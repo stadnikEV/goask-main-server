@@ -1,15 +1,17 @@
 const HttpError = require('../../error');
 
-module.exports = (uploadVideo, req, res, next) => {
-  const questionId = req.params.id;
+module.exports = (statusVideo, req, res, next) => {
+  const id = req.params.id;
 
-  if (uploadVideo[questionId]) {
-    next(new HttpError({
-      status: 403,
-      message: 'The video is uploading now',
-    }));
+  if (statusVideo[id]) {
+    if (statusVideo[id] !== 'streaming') {
+      next(new HttpError({
+        status: 403,
+        message: 'The video is uploading now',
+      }));
 
-    return;
+      return;
+    }
   }
 
   next();

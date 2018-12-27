@@ -2,14 +2,14 @@ const fs = require('fs');
 
 module.exports = ({ path }) => {
   const promise = new Promise((resolve, reject) => {
-    fs.mkdir(path, (err) => {
-      if (err === null) {
-        resolve();
+    fs.readFile(path, 'utf8', (err, data) => {
+      if (err) {
+        reject(err);
         return;
       }
-      reject(err);
+      resolve(data);
     })
   });
 
   return promise;
-}
+};

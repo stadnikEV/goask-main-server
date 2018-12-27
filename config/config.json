@@ -5,7 +5,7 @@
   "public-path-back-end": "http://localhost:8080",
   "public-path": "https://goask.club",
   "mongoose": {
-    "uri": "mongodb://localhost/goask3"
+    "uri": "mongodb://localhost/goask"
   },
   "session": {
     "secret": "secretWor",
@@ -22,5 +22,6 @@
   "maxRequestInterval": "4500",
   "downloadVideoPath": "../video",
   "sslPath": "../ssl",
-  "maxFilesSizeUpload": "1073741824"
+  "maxFilesSizeUpload": "1073741824",
+  "youtubeCredentialsPath": "../youtube-credentials"
 }

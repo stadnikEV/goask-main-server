@@ -1,4 +1,4 @@
-module.exports = ({ app, downloadVideo, uploadVideo }) => {
+module.exports = ({ app, statusVideo, authYoutube }) => {
   app.post('/api/login',
     require('../middleware/api/is-json'),
     require('./login'));
@@ -56,18 +56,24 @@ module.exports = ({ app, downloadVideo, uploadVideo }) => {
   app.get('/api/requests',
     require('../middleware/is-speaker'),
     require('../middleware/api/is-valid-request-range'),
-    require('./get-requests'));
+    require('./get-requests').bind(null, statusVideo));
 
   app.put('/api/requests/:id/reject',
     require('../middleware/api/is-json'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
-    require('./set-reject-question'));
+    require('../middleware/api/is-video-not-upload').bind(null, statusVideo),
+    require('../middleware/is-not-streaming').bind(null, statusVideo),
+    require('../middleware/api/is-question-not-ready'),
+    require('./set-reject-question').bind(null, statusVideo, authYoutube));
 
   app.put('/api/requests/:id/ready',
     require('../middleware/api/is-json'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
+    require('../middleware/api/is-video-not-upload').bind(null, statusVideo),
+    require('../middleware/is-not-streaming').bind(null, statusVideo),
+    require('../middleware/api/is-question-not-ready'),
     require('../middleware/is-video-exists'),
     require('./set-ready-question'));
 
@@ -75,26 +81,38 @@ module.exports = ({ app, downloadVideo, uploadVideo }) => {
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
     require('../middleware/api/is-question-not-ready'),
-    require('../middleware/api/is-video-not-download').bind(null, downloadVideo),
-    require('../middleware/api/is-video-not-upload').bind(null, uploadVideo),
-    require('./stream-start'));
+    require('../middleware/is-not-streaming').bind(null, statusVideo),
+    require('../middleware/api/is-video-not-upload').bind(null, statusVideo),
+    require('./stream-start').bind(null, statusVideo));
 
   app.post('/api/stream/:id',
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
-    require('./stream'));
+    require('./stream').bind(null, statusVideo));
 
   app.post('/api/stream/:id/stop',
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
-    require('./stream-stop'));
+    require('./stream-stop').bind(null, statusVideo, authYoutube));
 
   app.post('/api/upload/:id',
     require('../middleware/api/is-not-exceeded-file-size'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
-    require('../middleware/api/is-video-not-download').bind(null, downloadVideo),
-    require('../middleware/api/is-video-not-upload').bind(null, uploadVideo),
-    require('../middleware/is-not-streaming'),
-    require('./upload').bind(null, uploadVideo));
+    require('../middleware/api/is-question-not-ready'),
+    require('../middleware/api/is-video-not-upload').bind(null, statusVideo),
+    require('../middleware/is-not-streaming').bind(null, statusVideo),
+    require('./upload').bind(null, statusVideo, authYoutube));
+
+  app.get('/api/get-youtube-id-speaker/:id',
+    require('../middleware/is-speaker'),
+    require('../middleware/is-my-request'),
+    require('../middleware/is-video-exists'),
+    require('./get-youtube-id'));
+
+  app.get('/api/get-youtube-id-user/:id',
+    require('../middleware/is-login'),
+    require('../middleware/api/is-my-question'),
+    require('../middleware/is-video-exists'),
+    require('./get-youtube-id'));
 }

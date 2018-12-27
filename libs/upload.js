@@ -3,7 +3,7 @@ const HttpError = require('../error');
 const multiparty = require('multiparty');
 const fs = require('fs');
 
-module.exports = ({ req, id }) => {
+module.exports = ({ req, path }) => {
   const promise = new Promise((resolve, reject) => {
     let fileName = null;
     let currentFileName = null;
@@ -14,7 +14,7 @@ module.exports = ({ req, id }) => {
       autoFiles: true,
       maxFields: '1',
       maxFilesSize: `${config.get('maxFilesSizeUpload')}`,
-      uploadDir: `${config.get('downloadVideoPath')}/${id}`,
+      uploadDir: path,
     });
 
 
@@ -50,7 +50,15 @@ module.exports = ({ req, id }) => {
 
 
     form.on('close', () => {
-      const path = `${config.get('downloadVideoPath')}/${id}`;
+      if (fileName === null) {
+        reject(new HttpError({
+          status: 400,
+          message: 'file missing',
+        }));
+
+        return;
+      }
+
       fs.rename(`${path}/${currentFileName}`, `${path}/${fileName}`, (err) => {
         if (err) {
           reject(err);

@@ -1,4 +1,4 @@
-module.exports = ({ app, downloadVideo, uploadVideo }) => {
+module.exports = ({ app, statusVideo }) => {
   app.get('/', require('./main'));
   app.get('/login', require('./login'));
   app.get('/registration', require('./registration'));
@@ -21,21 +21,43 @@ module.exports = ({ app, downloadVideo, uploadVideo }) => {
     require('../middleware/is-login'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
-    require('../middleware/is-question-status-not-ready'),
+    require('../middleware/api/is-question-not-ready'),
     require('./stream'));
 
-  app.get('/download-video-speaker/:id',
+  app.get('/play-speaker/:id',
+    require('../middleware/is-login'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
     require('../middleware/is-not-streaming'),
-    require('../middleware/api/is-video-not-upload').bind(null, uploadVideo),
+    require('../middleware/api/is-video-not-upload').bind(null, statusVideo),
     require('../middleware/is-video-exists'),
-    require('./download-video').bind(null, downloadVideo));
+    require('./play-speaker'));
 
-  app.get('/download-video-user/:id',
+  app.get('/play-user/:id',
     require('../middleware/is-login'),
     require('../middleware/api/is-my-question'),
-    require('../middleware/is-question-status-ready'),
     require('../middleware/is-video-exists'),
-    require('./download-video').bind(null, downloadVideo));
+    require('./play-user'));
+
+  // app.get('/play-user/:id',
+  //   require('../middleware/is-login'),
+  //   require('../middleware/api/is-my-question'),
+  //   require('../middleware/is-question-ready'),
+  //   require('../middleware/is-video-exists'),
+  //   require('./play-user'));
+
+  // app.get('/download-video-speaker/:id',
+  //   require('../middleware/is-speaker'),
+  //   require('../middleware/is-my-request'),
+  //   require('../middleware/is-not-streaming'),
+  //   require('../middleware/api/is-video-not-upload').bind(null, uploadVideo),
+  //   require('../middleware/is-video-exists'),
+  //   require('./download-video').bind(null, downloadVideo));
+  //
+  // app.get('/download-video-user/:id',
+  //   require('../middleware/is-login'),
+  //   require('../middleware/api/is-my-question'),
+  //   require('../middleware/is-question-status-ready'),
+  //   require('../middleware/is-video-exists'),
+  //   require('./download-video').bind(null, downloadVideo));
 }

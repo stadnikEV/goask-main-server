@@ -4,8 +4,9 @@ const getRequestData = require('../../libs/get-request-data');
 
 const HttpError = require('../../error');
 
-module.exports = (req, res, next) => {
+module.exports = (statusVideo, req, res, next) => {
   const questionId = res.locals.questionId;
+  statusVideo[questionId] = 'streaming';
 
   getRequestData({
     req,
@@ -23,6 +24,7 @@ module.exports = (req, res, next) => {
       res.json(data);
     })
     .catch((e) => {
+      delete statusVideo[questionId];
       if (e.name === 'StatusCodeError') {
         const error = JSON.parse(e.error)
         next(new HttpError(error));
