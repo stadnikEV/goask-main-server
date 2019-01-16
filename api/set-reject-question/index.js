@@ -1,8 +1,8 @@
 const Question = require('../../models/question');
 const HttpError = require('../../error');
-const deleteVideo = require('../../libs/youtube/delete');
+const deleteVideo = require('../../libs/google/youtube-api/delete');
 
-module.exports = (statusVideo, authYoutube, req, res, next) => {
+module.exports = (statusVideo, oauthGoogle, req, res, next) => {
   const speaker = res.locals.speaker;
   const questionId = res.locals.questionId;
   let questionDB = null;
@@ -37,7 +37,7 @@ module.exports = (statusVideo, authYoutube, req, res, next) => {
       }
 
       statusVideo[questionId] = 'deleteYoutubeVideo';
-      return deleteVideo({ authYoutube, id: questionDB.statusVideo.id });
+      return deleteVideo({ oauthGoogle, id: questionDB.statusVideo.id });
     })
     .then(() => {
       delete statusVideo[questionId];

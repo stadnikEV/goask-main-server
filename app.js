@@ -11,17 +11,15 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./libs/mongoose');
-const initApiYoutube = require('./libs/youtube/init-api');
+const authorizeGoogle = require('./libs/google/authorize-google');
 const getPort = require('./libs/get-port');
 
 
-initApiYoutube()
-  .then((authYoutube) => {
+authorizeGoogle()
+  .then((oauthGoogle) => {
     let port = getPort();
 
     const statusVideo = {};
-    // const downloadVideo = {};
-    // const uploadVideo = {};
 
     const app = express();
     app.set('port', port);
@@ -48,7 +46,7 @@ initApiYoutube()
     app.use(require('./middleware/send-http-error'));
 
     require('./routes')({ app, statusVideo });
-    require('./api')({ app, statusVideo, authYoutube});
+    require('./api')({ app, statusVideo, oauthGoogle });
 
     app.use(express.static('./public'));
 
@@ -93,7 +91,6 @@ initApiYoutube()
         logger.info('Express server listening on port ' + port);
       });
     }
-
   })
   .catch((e) => {
     console.log(e);

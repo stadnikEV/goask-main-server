@@ -4,12 +4,12 @@ const httpRequest = require('request-promise-native');
 const getRequestData = require('../../libs/get-request-data');
 const HttpError = require('../../error');
 const Question = require('../../models/question');
-const deleteVideo = require('../../libs/youtube/delete');
-const insert = require('../../libs/youtube/insert');
-const isEndOfProcessing = require('../../libs/youtube/is-end-of-processing');
+const deleteVideo = require('../../libs/google/youtube-api/delete');
+const insert = require('../../libs/google/youtube-api/insert');
+const isEndOfProcessing = require('../../libs/google/youtube-api/is-end-of-processing');
 const removeDirectory = require('../../libs/remove-directory');
 
-module.exports = (statusVideo, authYoutube, req, res, next) => {
+module.exports = (statusVideo, oauthGoogle, req, res, next) => {
   const id = req.params.id;
   let question = null;
   const filePath = `${config.get('downloadVideoPath')}/${id}/1.webm`;
@@ -39,13 +39,13 @@ module.exports = (statusVideo, authYoutube, req, res, next) => {
       }
 
       statusVideo[id] = 'deleteYoutubeVideo';
-      return deleteVideo({ authYoutube, id: question.statusVideo.id });
+      return deleteVideo({ oauthGoogle, id: question.statusVideo.id });
     })
     .then(() => {
       statusVideo[id] = 'uploadYoutube';
 
       return insert({
-        authYoutube,
+        oauthGoogle,
         categoryId: '22',
         description: 'Goask video',
         title: 'Test video',
@@ -56,7 +56,7 @@ module.exports = (statusVideo, authYoutube, req, res, next) => {
       videoID = data.data.id;
       videoLink = `https://www.youtube.com/watch?v=${videoID}`;
       statusVideo[id] === 'decodeYoutube';
-      return isEndOfProcessing({ authYoutube, id: videoID });
+      return isEndOfProcessing({ oauthGoogle, id: videoID });
     })
     .then((status) => {
       if (status === 'failed') {

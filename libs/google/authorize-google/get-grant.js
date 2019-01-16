@@ -4,6 +4,7 @@ module.exports = ({ youtubeClient, scope }) => {
   const promise = new Promise((resolve) => {
     var authUrl = youtubeClient.generateAuthUrl({
       access_type: 'offline',
+      prompt: 'consent',
       scope,
     });
 

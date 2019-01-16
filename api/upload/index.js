@@ -6,13 +6,13 @@ const HttpError = require('../../error');
 const upload = require('../../libs/upload');
 const removeDirectory = require('../../libs/remove-directory');
 const createDirectory = require('../../libs/create-directory');
-const insert = require('../../libs/youtube/insert');
-const isEndOfProcessing = require('../../libs/youtube/is-end-of-processing');
-const deleteVideo = require('../../libs/youtube/delete');
+const insert = require('../../libs/google/youtube-api/insert');
+const isEndOfProcessing = require('../../libs/google/youtube-api/is-end-of-processing');
+const deleteVideo = require('../../libs/google/youtube-api/delete');
 
 
 
-module.exports = (statusVideo, authYoutube, req, res, next) => {
+module.exports = (statusVideo, oauthGoogle, req, res, next) => {
   const id = req.params.id;
   const question = res.locals.question;
 
@@ -49,19 +49,19 @@ module.exports = (statusVideo, authYoutube, req, res, next) => {
       res.json({});
 
       filePath = `${config.get('downloadVideoPath')}/${id}/${fileName}`;
-      
+
       if (!question.statusVideo || !question.statusVideo.id) {
         return;
       }
 
       statusVideo[id] = 'deleteYoutubeVideo';
-      return deleteVideo({ authYoutube, id: question.statusVideo.id });
+      return deleteVideo({ oauthGoogle, id: question.statusVideo.id });
     })
     .then(() => {
       statusVideo[id] = 'uploadYoutube';
 
       return insert({
-        authYoutube,
+        oauthGoogle,
         categoryId: '22',
         description: 'Goask video',
         title: 'Test video',
@@ -72,7 +72,7 @@ module.exports = (statusVideo, authYoutube, req, res, next) => {
       videoID = data.data.id;
       videoLink = `https://www.youtube.com/watch?v=${videoID}`;
       statusVideo[id] === 'decodeYoutube';
-      return isEndOfProcessing({ authYoutube, id: videoID });
+      return isEndOfProcessing({ oauthGoogle, id: videoID });
     })
     .then((status) => {
       if (status === 'failed') {

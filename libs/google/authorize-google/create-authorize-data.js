@@ -5,7 +5,7 @@ const config = require('../../../config');
 
 module.exports = () => {
   const promise = new Promise((resolve, reject) => {
-    readFile({ path: `${config.get('youtubeCredentialsPath')}/client_secret.json` })
+    readFile({ path: `${config.get('googleCredentialsPath')}/client_secret.json` })
       .then((data) => {
         const credentials = JSON.parse(data);
         const clientSecret = credentials.web.client_secret;

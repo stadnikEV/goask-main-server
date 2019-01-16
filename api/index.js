@@ -1,4 +1,4 @@
-module.exports = ({ app, statusVideo, authYoutube }) => {
+module.exports = ({ app, statusVideo, oauthGoogle }) => {
   app.post('/api/login',
     require('../middleware/api/is-json'),
     require('./login'));
@@ -7,7 +7,7 @@ module.exports = ({ app, statusVideo, authYoutube }) => {
 
   app.post('/api/registration',
     require('../middleware/api/is-json'),
-    require('./registration'));
+    require('./registration').bind(null, oauthGoogle));
 
   app.post('/api/registration-speaker',
     require('../middleware/api/is-json'),
@@ -65,7 +65,7 @@ module.exports = ({ app, statusVideo, authYoutube }) => {
     require('../middleware/api/is-video-not-upload').bind(null, statusVideo),
     require('../middleware/is-not-streaming').bind(null, statusVideo),
     require('../middleware/api/is-question-not-ready'),
-    require('./set-reject-question').bind(null, statusVideo, authYoutube));
+    require('./set-reject-question').bind(null, statusVideo, oauthGoogle));
 
   app.put('/api/requests/:id/ready',
     require('../middleware/api/is-json'),
@@ -93,7 +93,7 @@ module.exports = ({ app, statusVideo, authYoutube }) => {
   app.post('/api/stream/:id/stop',
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
-    require('./stream-stop').bind(null, statusVideo, authYoutube));
+    require('./stream-stop').bind(null, statusVideo, oauthGoogle));
 
   app.post('/api/upload/:id',
     require('../middleware/api/is-not-exceeded-file-size'),
@@ -102,7 +102,7 @@ module.exports = ({ app, statusVideo, authYoutube }) => {
     require('../middleware/api/is-question-not-ready'),
     require('../middleware/api/is-video-not-upload').bind(null, statusVideo),
     require('../middleware/is-not-streaming').bind(null, statusVideo),
-    require('./upload').bind(null, statusVideo, authYoutube));
+    require('./upload').bind(null, statusVideo, oauthGoogle));
 
   app.get('/api/get-youtube-id-speaker/:id',
     require('../middleware/is-speaker'),

@@ -13,7 +13,7 @@ module.exports = ({ youtubeClient, scope }) => {
       .then((token) => {
         newToken = token;
         return writeFile({
-          path: `${config.get('youtubeCredentialsPath')}/token.json`,
+          path: `${config.get('googleCredentialsPath')}/token.json`,
           data: JSON.stringify(token),
         });
       })

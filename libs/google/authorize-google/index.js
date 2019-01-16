@@ -5,7 +5,10 @@ const createNewToken = require('./create-new-token');
 module.exports = () => {
   const promise = new Promise((resolve, reject) => {
     let youtubeClient = null;
-    const scope = 'https://www.googleapis.com/auth/youtube.force-ssl';
+    const scope = [
+      'https://www.googleapis.com/auth/gmail.send',
+      'https://www.googleapis.com/auth/youtube.force-ssl',
+    ];
 
     createAuthorizeData()
       .then((oauth2Client) => {

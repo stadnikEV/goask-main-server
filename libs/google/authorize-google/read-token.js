@@ -3,7 +3,7 @@ const config = require('../../../config');
 
 module.exports = () => {
   const promise = new Promise((resolve) => {
-    readFile({ path: `${config.get('youtubeCredentialsPath')}/token.json` })
+    readFile({ path: `${config.get('googleCredentialsPath')}/token.json` })
       .then((data) => {
         const token = JSON.parse(data);
         resolve(token);

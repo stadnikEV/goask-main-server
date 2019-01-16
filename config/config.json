@@ -23,5 +23,5 @@
   "downloadVideoPath": "../video",
   "sslPath": "../ssl",
   "maxFilesSizeUpload": "1073741824",
-  "youtubeCredentialsPath": "../youtube-credentials"
+  "googleCredentialsPath": "../google-credentials"
 }
