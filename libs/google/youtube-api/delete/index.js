@@ -1,7 +1,7 @@
 const {google} = require('googleapis');
 const removeEmptyParameters = require('../remove-empty-parameters');
 
-module.exports = ({ authYoutube, id }) => {
+module.exports = ({ oauthGoogle, id }) => {
   const promise = new Promise((resolve, reject) => {
     const requestData = {
       'params': {
@@ -12,7 +12,7 @@ module.exports = ({ authYoutube, id }) => {
 
     const service = google.youtube('v3');
     const parameters = removeEmptyParameters(requestData['params']);
-    parameters['auth'] = authYoutube;
+    parameters['auth'] = oauthGoogle;
     service.videos.delete(parameters, (err, response) => {
       if (err) {
         reject(err);

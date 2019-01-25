@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
         message: 'not valid email or password',
       }));
     }
+
     if (!user.checkPassword(password) || !user.active) {
       return Promise.reject(new HttpError({
         status: 403,

@@ -3,7 +3,7 @@ const removeEmptyParameters = require('../remove-empty-parameters');
 const createResource = require('../create-resource');
 
 module.exports = ({
-  authYoutube,
+  oauthGoogle,
   stream,
   categoryId,
   description,
@@ -30,7 +30,7 @@ module.exports = ({
 
     const service = google.youtube('v3');
     const parameters = removeEmptyParameters(requestData['params']);
-    parameters['auth'] = authYoutube;
+    parameters['auth'] = oauthGoogle;
     parameters['media'] = { body: stream };
     parameters['notifySubscribers'] = false;
     parameters['resource'] = createResource(requestData['properties']);

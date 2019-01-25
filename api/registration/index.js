@@ -2,8 +2,8 @@ const HttpError = require('../../error');
 const getPublicPaths = require('../../libs/get-public-paths');
 const mongoose = require('../../libs/mongoose');
 const User = require('../../models/user');
-const { google } = require('googleapis');
-const base64url = require('base64url');
+const crypto = require('crypto');
+const sendMail = require('../../libs/google/gmail-api/send-email');
 
 
 module.exports = (oauthGoogle, req, res, next) => {
@@ -33,44 +33,27 @@ module.exports = (oauthGoogle, req, res, next) => {
         email,
         userName,
         password,
-        _emailConfirm: email,
+        emailConfirm: crypto.createHmac('sha1', 'goask').update(email).digest('hex'),
         active: false,
       });
 
       return user.save();
     })
     .then((user) => {
-      const gmail = google.gmail({version: 'v1', auth: oauthGoogle });
-      // const theme = base64url('Тема письма', 'utf8');
-      // console.log(theme);
-
-      const buff = Buffer.from('Подтверждение регистрации на Goask.club', 'utf8');
-      let base64 = buff.toString('base64');
-      var email = [
-    	  "MIME-Version: 1.0\n",
-    		"Content-Transfer-Encoding: 7bit\n",
-        'Content-Type: text/plain; charset="UTF-8"\n',
-    		'to: ', 'stadnik24fps@gmail.com', '\n',
-    		'from: ', 'goaskonline@gmail.com', '\n',
-    		'subject: ', `=?UTF-8?B?${base64}?=`, '\n\n',
-    		"message: ", "Для подтверждения регистрации на сайте Goask.club перейдите по ссылке", "\n",
-    	].join('');
-
-      const base64EncodedEmail = base64url(email, 'utf8');
-      gmail.users.messages.send({
-        userId: 'me',
-        'resource': {
-          'raw': base64EncodedEmail,
-        },
-      }, (err) => {
-        console.log(err);
-      });
-
-
-      // res.status(201);
-      // let { publicPathBackEnd } = getPublicPaths();
-      // // req.session.userId = user._id;
-      // res.json({ link: `${publicPathBackEnd}` });
+      const { publicPathBackEnd } = getPublicPaths();
+      sendMail({
+        oauthGoogle,
+        to: user.email,
+        theme: 'Регистрация Goask.club',
+        body: `Для подтверждения регистрации на Goask.club, перйдите по ссылке: ${publicPathBackEnd}/confirm-email/${user.emailConfirm}`,
+      })
+        .then(() => {
+          res.status(200);
+          res.json({});
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     })
     .catch((err) => {
       next(err);
