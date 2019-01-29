@@ -1,4 +1,4 @@
-const categoriesNameConfig = require('../../libs/categories-name-config');
+const getCategoriesName = require('../../libs/get-categories-name');
 const Speaker = require('../../models/speaker');
 
 module.exports = (req, res, next) => {
@@ -8,16 +8,9 @@ module.exports = (req, res, next) => {
     .then((speaker) => {
       const categories = speaker.categories;
 
-      let result = {
-        categories: [],
-      };
+      let result = {};
 
-      categories.forEach((item) => {
-        result.categories.push({
-          value: item.categoryName,
-          content: categoriesNameConfig[item.categoryName],
-        });
-      });
+      result.categories = getCategoriesName({ categories });
 
       res.json(result);
     })

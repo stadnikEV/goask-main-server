@@ -13,7 +13,6 @@ module.exports = (req, res, next) => {
       return user;
     })
     .then((user) => {
-      console.log('пользователь найден');
       user.emailConfirm = undefined;
       user.active = true;
 

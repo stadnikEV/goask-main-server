@@ -13,9 +13,12 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./libs/mongoose');
 const authorizeGoogle = require('./libs/google/authorize-google');
 const getPort = require('./libs/get-port');
+const initAdmin = require('./libs/init-admin');
 
-
-authorizeGoogle()
+initAdmin()
+  .then(() => {
+    return authorizeGoogle();
+  })
   .then((oauthGoogle) => {
     let port = getPort();
 

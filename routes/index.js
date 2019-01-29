@@ -1,4 +1,5 @@
 module.exports = ({ app, statusVideo }) => {
+  app.get('/admin', require('./admin'));
   app.get('/', require('./main'));
   app.get('/login', require('./login'));
   app.get('/registration', require('./registration'));

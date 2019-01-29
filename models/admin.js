@@ -7,20 +7,15 @@ const schema = new Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId,
   },
-  active: {
-    type: Boolean,
-  },
-  userName: {
-    type: String,
-    required: true
-  },
-  email: {
+  role: {
     type: String,
     unique: true,
     required: true
   },
-  emailConfirm: {
+  login: {
     type: String,
+    unique: true,
+    required: true
   },
   hashedPassword: {
     type: String,
@@ -30,18 +25,10 @@ const schema = new Schema({
     type: String,
     required: true
   },
-  questions: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Question',
-    }
-  ],
   created: {
     type: Date,
     default: Date.now
   },
-  speakerId: Number,
-  speakerActive: Boolean,
 });
 
 schema.methods.encryptPassword = function(password) {
@@ -60,6 +47,6 @@ schema.methods.checkPassword = function(password) {
   return this.encryptPassword(password) === this.hashedPassword;
 };
 
-const User = mongoose.model('User', schema);
+const Admin = mongoose.model('Admin', schema);
 
-module.exports = User;
+module.exports = Admin;

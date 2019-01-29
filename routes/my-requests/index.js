@@ -5,7 +5,7 @@ const User = require('../../models/user');
 module.exports = (req, res, next) => {
   isLogin({ req, User })
     .then((user) => {
-      if (!user || !user.speakerId) {
+      if (!user || !user.speakerId || !user.speakerActive) {
         res.redirect('/login');
         return;
       }

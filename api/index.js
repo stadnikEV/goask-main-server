@@ -3,6 +3,10 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('../middleware/api/is-json'),
     require('./login'));
 
+  app.post('/api/login-admin',
+    require('../middleware/api/is-json'),
+    require('./login-admin'));
+
   app.get('/api/logout', require('./logout'));
 
   app.post('/api/registration',
@@ -13,13 +17,25 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('../middleware/api/is-json'),
     require('../middleware/is-login'),
     require('../middleware/api/is-valid-category'),
-    require('./registration-speaker'));
+    require('./registration-speaker').bind(null, oauthGoogle));
 
   app.get('/api/speakers/:id/categories-name',
-    require('./get-speaker-categories-name')); // categories-name через параметр
+    require('./get-speaker-categories-name'));
 
   app.get('/api/categories-name',
     require('./get-categories-name'));
+
+  app.get('/api/speakers',
+    require('../middleware/is-admin'),
+    require('./get-speakers'));
+
+  app.get('/api/speakers/:id',
+    require('../middleware/is-admin'),
+    require('./get-speaker-details'));
+
+  app.post('/api/speakers/:id/active',
+    require('../middleware/is-admin'),
+    require('./set-speaker-active'));
 
   app.post('/api/add-session',
     require('../middleware/api/is-json'),

@@ -18,7 +18,7 @@ module.exports = (req, res, next) => {
           buttons: {
             logout: true,
             createSpeaker: true,
-            createSpeakerSelect: 'button-header__link_selected',
+            createSpeakerSelect: 'button-header__button_selected',
           },
         },
         paths: getPublicPaths(),

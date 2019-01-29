@@ -3,9 +3,10 @@ const HttpError = require('../error');
 const isMultipartFormData = require('../libs/is-multipart-form-data');
 
 module.exports = (req, res, next) => {
+  console.log(req.session.speakerId)
   Speaker.findOne({ speakerId: req.session.speakerId })
     .then((speaker) => {
-      if (!speaker) {
+      if (!speaker || !speaker.active) {
         const contentType = req.headers['content-type'];
 
         if (contentType === 'application/json'
@@ -21,7 +22,7 @@ module.exports = (req, res, next) => {
 
         return;
       }
-      
+
       res.locals.speaker = speaker;
       next();
     })

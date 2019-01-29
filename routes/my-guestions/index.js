@@ -20,8 +20,8 @@ module.exports = (req, res, next) => {
         },
         userNavigation: {
           buttons: {
-            sessions: user.speakerId,
-            requests: user.speakerId,
+            sessions: user.speakerActive && user.speakerId,
+            requests: user.speakerActive && user.speakerId,
             questionsSelect: 'button-user-navigation__button_selected',
           }
         },
