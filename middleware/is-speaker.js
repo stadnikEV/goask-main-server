@@ -1,11 +1,24 @@
 const Speaker = require('../models/speaker');
 const HttpError = require('../error');
 const isMultipartFormData = require('../libs/is-multipart-form-data');
+const isAdmin = require('../libs/is-admin');
 
 module.exports = (req, res, next) => {
-  console.log(req.session.speakerId)
-  Speaker.findOne({ speakerId: req.session.speakerId })
+  isAdmin({ req })
+    .then((admin) => {
+      console.log(admin);
+      if (admin) {
+        next();
+        return 'admin';
+      }
+
+      return Speaker.findOne({ speakerId: req.session.speakerId });
+    })
     .then((speaker) => {
+      if (speaker === 'admin') {
+        return;
+      }
+
       if (!speaker || !speaker.active) {
         const contentType = req.headers['content-type'];
 

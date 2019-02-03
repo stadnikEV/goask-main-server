@@ -10,7 +10,7 @@ module.exports = ({ oauthGoogle, id }) => {
       }
     };
 
-    const timeInterval = 1000 * 30;
+    const timeInterval = 1000 * 20;
 
     const getStatus = () => {
       setTimeout(() => {
@@ -24,7 +24,14 @@ module.exports = ({ oauthGoogle, id }) => {
             return;
           }
 
-          const status = response.data.items[0].status.uploadStatus;
+          try {
+            var status = response.data.items[0].status.uploadStatus;
+          } catch (e) {
+            resolve('failed');
+
+            return;
+          }
+
 
           if (status === 'processed') {
             resolve('processed');

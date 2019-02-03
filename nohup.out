@@ -1,0 +1,26 @@
+
+> main-server@0.0.0 prod /Users/FilmRental/web-projects/goask/main-server
+> NODE_ENV=prod node app.js
+
+events.js:183
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EACCES 0.0.0.0:443
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at Server.setupListenHandle [as _listen2] (net.js:1334:19)
+    at listenInCluster (net.js:1392:12)
+    at Server.listen (net.js:1476:7)
+    at initAdmin.then.then (/Users/FilmRental/web-projects/goask/main-server/app.js:88:36)
+    at <anonymous>
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! main-server@0.0.0 prod: `NODE_ENV=prod node app.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the main-server@0.0.0 prod script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/FilmRental/.npm/_logs/2019-01-30T13_25_30_486Z-debug.log

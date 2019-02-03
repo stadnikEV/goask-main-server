@@ -24,7 +24,6 @@ module.exports = (req, res, next) => {
       })
     : false;
 
-  res.locals.searchRequest.status = 'active';
 
   SessionApp.find(res.locals.searchRequest)
     .skip(numberPagesInSession * (pageNumber - 1))

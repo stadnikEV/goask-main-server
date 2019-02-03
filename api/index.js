@@ -20,6 +20,7 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('./registration-speaker').bind(null, oauthGoogle));
 
   app.get('/api/speakers/:id/categories-name',
+    require('../middleware/api/is-valid-id'),
     require('./get-speaker-categories-name'));
 
   app.get('/api/categories-name',
@@ -30,12 +31,14 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('./get-speakers'));
 
   app.get('/api/speakers/:id',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/is-admin'),
     require('./get-speaker-details'));
 
-  app.post('/api/speakers/:id/active',
+  app.post('/api/speakers/:id/status',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/is-admin'),
-    require('./set-speaker-active'));
+    require('./set-speaker-status'));
 
   app.post('/api/add-session',
     require('../middleware/api/is-json'),
@@ -44,9 +47,12 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('./add-session'));
 
   app.get('/api/speakers/:id/sessions',
+    require('../middleware/api/is-valid-id'),
+    require('../middleware/is-speaker'),
     require('./get-speaker-sessions'));
 
   app.delete('/api/sessions/:id',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/api/get-session'),
     require('../middleware/is-speaker'),
     require('../middleware/api/check-access-to-change-session'),
@@ -65,6 +71,7 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('./get-questions'));
 
   app.get('/api/questions/:id',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/is-login'),
     require('../middleware/api/is-my-question'),
     require('./get-question-details'));
@@ -75,6 +82,7 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('./get-requests').bind(null, statusVideo));
 
   app.put('/api/requests/:id/reject',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/api/is-json'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
@@ -84,6 +92,7 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('./set-reject-question').bind(null, statusVideo, oauthGoogle));
 
   app.put('/api/requests/:id/ready',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/api/is-json'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
@@ -94,6 +103,7 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('./set-ready-question'));
 
   app.post('/api/stream/:id/start',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
     require('../middleware/api/is-question-not-ready'),
@@ -102,16 +112,19 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('./stream-start').bind(null, statusVideo));
 
   app.post('/api/stream/:id',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
     require('./stream').bind(null, statusVideo));
 
   app.post('/api/stream/:id/stop',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
     require('./stream-stop').bind(null, statusVideo, oauthGoogle));
 
   app.post('/api/upload/:id',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/api/is-not-exceeded-file-size'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
@@ -121,12 +134,14 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
     require('./upload').bind(null, statusVideo, oauthGoogle));
 
   app.get('/api/get-youtube-id-speaker/:id',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/is-speaker'),
     require('../middleware/is-my-request'),
     require('../middleware/is-video-exists'),
     require('./get-youtube-id'));
 
   app.get('/api/get-youtube-id-user/:id',
+    require('../middleware/api/is-valid-id'),
     require('../middleware/is-login'),
     require('../middleware/api/is-my-question'),
     require('../middleware/is-video-exists'),

@@ -6,7 +6,6 @@ module.exports = (req, res, next) => {
     .populate({
       path: 'sessions',
       match: { status: 'active' },
-
       select: 'sessionId theme describeSession category -_id',
     })
     .then((speaker) => {

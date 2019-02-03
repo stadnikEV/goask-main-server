@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
   //   }
   // });
 
-  sessionApp.status = 'inactive';
+  sessionApp.status = 'removed';
   sessionApp.save()
     .then(() => {
       res.json({});

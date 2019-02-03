@@ -5,7 +5,7 @@ const addStatusVideo = require('./add-status-video');
 module.exports = (statusVideo, req, res, next) => {
   const speaker = res.locals.speaker;
   const params = res.locals.params;
-
+  
   const numberOfRequests = speaker.questions.length;
 
   if (numberOfRequests === 0) {

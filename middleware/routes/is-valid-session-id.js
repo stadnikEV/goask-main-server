@@ -12,10 +12,9 @@ module.exports = (req, res, next) => {
     return;
   }
 
-  SessionApp.findOne({ sessionId, status: 'active' })
+  SessionApp.findOne({ sessionId, status: 'active', active: true })
   .populate('speaker')
   .then((session) => {
-
       if (!session) {
         next(new HttpError({
           status: 404,

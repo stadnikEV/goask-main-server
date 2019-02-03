@@ -1,17 +1,21 @@
-const getQuery = require('./get-query');
 const getResponse = require('./get-response');
 const Speaker = require('../../models/speaker');
 
 module.exports = (req, res, next) => {
   const speakerId = req.params.id;
-  const query = getQuery({ req });
 
-  Speaker.findOne({ speakerId }, query.speaker)
+  Speaker.findOne({ speakerId }, ['firstname', 'lastname', 'categories', 'active', 'about', 'speakerId', '-_id'])
     .sort({ created: -1 })
-    .populate('session', 'theme -_id')
+    .populate({
+      path: 'questions',
+      select: 'status -_id',
+    })
+    // .populate({
+    //   path: 'sessions',
+    //   select: 'theme status sessionId -_id',
+    // })
     .then((response) => {
-      // const response = getResponse({ speakers, fields: query.fields })
-      // res.json(response);
+      res.json(getResponse({ response }));
     })
     .catch((e) => {
       next(e);

@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
 
   res.locals.searchRequest = {
     status: 'active',
+    active: true,
   };
 
   if (res.locals.category) {

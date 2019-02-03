@@ -47,8 +47,8 @@ module.exports = (statusVideo, oauthGoogle, req, res, next) => {
       return insert({
         oauthGoogle,
         categoryId: '22',
-        description: 'Goask video',
-        title: 'Test video',
+        description: question.question,
+        title: `Question_Id ${question._id}`,
         stream: fs.createReadStream(filePath),
       });
     })
