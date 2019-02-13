@@ -40,7 +40,10 @@ const schema = new Schema({
     type: Date,
     default: Date.now
   },
-  speakerId: Number,
+  speakerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Speaker',
+  },
   speakerActive: Boolean,
 });
 

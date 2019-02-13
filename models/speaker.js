@@ -5,11 +5,11 @@ var schema = new Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId,
   },
-  speakerId: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
+  // speakerId: {
+  //   type: Number,
+  //   required: true,
+  //   unique: true,
+  // },
   active: Boolean,
   about: String,
   firstname: String,

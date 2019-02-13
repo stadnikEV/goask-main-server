@@ -19,6 +19,10 @@ module.exports = ({ speakers, fields }) => {
         dataSpeaker[field] = speaker.questions.length;
         return;
       }
+      if (field === 'speakerId') {
+        dataSpeaker[field] = speaker._id;
+        return;
+      }
       dataSpeaker[field] = speaker[field];
     });
     response.push(dataSpeaker);

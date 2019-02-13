@@ -89,7 +89,7 @@ initAdmin()
         console.log('Express server listening on port ' + port);
       });
     }
-    if (ENV === 'dev') {
+    if (ENV === 'dev' || ENV === 'test') {
       http.createServer(app).listen(port, () => {
         logger.info('Express server listening on port ' + port);
       });

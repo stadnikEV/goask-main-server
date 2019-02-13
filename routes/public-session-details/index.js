@@ -35,6 +35,7 @@ module.exports = (req, res, next) => {
         header: {
           buttons: {
             login: true,
+            createSpeaker: true,
           },
         },
         session: res.locals.session,

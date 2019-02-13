@@ -5,7 +5,7 @@ module.exports = () => {
   if (ENV === 'prod') {
     return config.get('port-prod');
   }
-  if (ENV === 'dev') {
+  if (ENV === 'dev' || ENV === 'test') {
     return config.get('port-dev');
   }
 };

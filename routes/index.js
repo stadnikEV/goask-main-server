@@ -3,9 +3,9 @@ module.exports = ({ app, statusVideo }) => {
   app.get('/', require('./main'));
   app.get('/login', require('./login'));
   app.get('/registration', require('./registration'));
-  app.get('/registration-speaker', require('./registration-speaker'));
+  app.get('/create-speaker', require('./create-speaker'));
   app.get('/my-sessions', require('./my-sessions'));
-  app.get('/confirm-email/:id', require('./confirm-email'));
+  app.get('/confirm-user-email/:id', require('./confirm-user-email'));
 
   app.get('/public-sessions',
     require('../middleware/routes/is-valid-category'),

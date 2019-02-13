@@ -13,7 +13,8 @@ module.exports = (req, res, next) => {
         header: {
           buttons: {
             registration: true,
-            registrationSelect: 'button-header__link_selected'
+            registrationSelect: 'button-header__button_selected',
+            createSpeaker: true,
           }
         },
         paths: getPublicPaths(),

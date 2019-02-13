@@ -11,13 +11,18 @@ module.exports = ({ app, statusVideo, oauthGoogle }) => {
 
   app.post('/api/registration',
     require('../middleware/api/is-json'),
-    require('./registration').bind(null, oauthGoogle));
+    require('./registration-user').bind(null, oauthGoogle));
 
-  app.post('/api/registration-speaker',
+  app.post('/api/become-speaker',
     require('../middleware/api/is-json'),
     require('../middleware/is-login'),
     require('../middleware/api/is-valid-category'),
-    require('./registration-speaker').bind(null, oauthGoogle));
+    require('./become-speaker').bind(null, oauthGoogle));
+
+  app.post('/api/create-speaker',
+    require('../middleware/api/is-json'),
+    require('../middleware/api/is-valid-category'),
+    require('./create-speaker').bind(null, oauthGoogle));
 
   app.get('/api/speakers/:id/categories-name',
     require('../middleware/api/is-valid-id'),

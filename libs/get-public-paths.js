@@ -4,7 +4,7 @@ module.exports = () => {
   let publicPathFrontEnd = null;
   let publicPathBackEnd = null;
 
-  if (process.env.NODE_ENV === 'dev') {
+  if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test') {
     publicPathFrontEnd = config.get('public-path-front-end');
     publicPathBackEnd = config.get('public-path-back-end');
   } else {

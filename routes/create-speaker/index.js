@@ -5,18 +5,20 @@ const User = require('../../models/user');
 module.exports = (req, res, next) => {
   isLogin({ req, User })
     .then((user) => {
-      if (!user) {
-        res.redirect('/');
-        return;
-      }
+      // if (!user) {
+      //   res.redirect('/');
+      //   return;
+      // }
       if (user.speakerId) {
         res.redirect('/');
         return;
       }
-      res.render('pages/page-registration-speaker', {
+      res.render('pages/page-create-speaker', {
+        isLogin: !!user,
         header: {
           buttons: {
-            logout: true,
+            logout: !!user,
+            login: !user,
             createSpeaker: true,
             createSpeakerSelect: 'button-header__button_selected',
           },

@@ -4,6 +4,7 @@ const Speaker = require('../../models/speaker');
 
 module.exports = (req, res, next) => {
   const query = getQuery({ req });
+
   Speaker.find(query.find, query.fields)
     .sort({ created: -1 })
     .populate({

@@ -4,24 +4,22 @@ const isMultipartFormData = require('../libs/is-multipart-form-data');
 const isAdmin = require('../libs/is-admin');
 
 module.exports = (req, res, next) => {
-  isAdmin({ req })
-    .then((admin) => {
-      console.log(admin);
-      if (admin) {
-        next();
-        return 'admin';
-      }
 
-      return Speaker.findOne({ speakerId: req.session.speakerId });
+  let speaker = null;
+  Speaker.findOne({ speakerId: req.session.speakerId })
+    .then((model) => {
+      speaker = model;
+      return isAdmin({ req })
     })
-    .then((speaker) => {
-      if (speaker === 'admin') {
-        return;
-      }
-
+    .then((admin) => {
       if (!speaker || !speaker.active) {
-        const contentType = req.headers['content-type'];
 
+        if (admin) {
+          next();
+          return;
+        }
+
+        const contentType = req.headers['content-type'];
         if (contentType === 'application/json'
         || isMultipartFormData({ contentType })
         || contentType === 'video/webm') {

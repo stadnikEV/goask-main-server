@@ -2,7 +2,7 @@ const HttpError = require('../../error');
 const Speaker = require('../../models/speaker');
 
 module.exports = (req, res, next) => {
-  Speaker.findOne({ speakerId: req.params.id })
+  Speaker.findById(req.params.id)
     .populate({
       path: 'sessions',
       match: { status: 'active' },

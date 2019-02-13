@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
   let lastStatus = null;
 
   let documents = [];
-  Speaker.findOne({ speakerId })
+  Speaker.findById(speakerId)
     .populate('user')
     .populate('sessions')
     .then((speaker) => {

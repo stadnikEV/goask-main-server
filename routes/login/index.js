@@ -13,7 +13,8 @@ module.exports = (req, res, next) => {
         header: {
           buttons: {
             login: true,
-            loginSelect: 'button-header__link_selected',
+            loginSelect: 'button-header__button_selected',
+            createSpeaker: true,
           },
         },
         paths: getPublicPaths(),

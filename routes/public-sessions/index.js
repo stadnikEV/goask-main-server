@@ -69,6 +69,7 @@ module.exports = (req, res, next) => {
         header: {
           buttons: {
             login: true,
+            createSpeaker: true,
             speakersSelect: 'button-header__button_selected',
           },
         },
