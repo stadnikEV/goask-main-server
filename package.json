@@ -11,6 +11,7 @@
   "author": "StadnikEV",
   "license": "ISC",
   "dependencies": {
+    "base64-arraybuffer": "^0.1.5",
     "base64url": "^3.0.1",
     "body-parser": "^1.18.3",
     "connect-mongo": "^2.0.1",

@@ -14,10 +14,9 @@ var schema = new Schema({
   about: String,
   firstname: String,
   lastname: String,
+  avatar: String,
   categories: [
-    {
-      categoryName : String,
-    },
+    String,
   ],
   user: {
     type: mongoose.Schema.Types.ObjectId,

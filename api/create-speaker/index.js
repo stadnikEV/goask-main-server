@@ -1,4 +1,8 @@
 const HttpError = require('../../error');
+const base64 = require('base64-arraybuffer');
+const arrayBufferToBuffer = require('../../libs/arraybuffer-to-buffer');
+const removeDirectory = require('../../libs/remove-directory');
+const writeFile = require('../../libs/write-file');
 const getPublicPaths = require('../../libs/get-public-paths');
 const mongoose = require('../../libs/mongoose');
 const User = require('../../models/user');
@@ -11,6 +15,8 @@ const environment = process.env.NODE_ENV;
 
 
 module.exports = (oauthGoogle, req, res, next) => {
+  const avatar = req.body.avatar;
+  const avatarExtend = req.body.avatarExtend
   const email = req.body.email;
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
@@ -23,20 +29,26 @@ module.exports = (oauthGoogle, req, res, next) => {
   let speakerDB = null;
 
   User.findOne({ email })
+    .populate('speakerId')
     .then((user) => {
       if (user && user.active) {
       return Promise.reject(new HttpError({
           status: 403,
-          message: 'user with that email address already exists',
+          message: 'email already exists',
         }));
       }
       return user;
     })
     .then((user) => {
       if (user) {
+        let avatarPath = null;
+        if (user.speakerId) {
+          avatarPath = `../avatars/${user.speakerId.avatar}`;
+        }
         return Promise.all([
           User.remove({ _id: user._id }),
           Speaker.remove({ _id: user.speakerId }),
+          removeDirectory({ path: avatarPath }),
         ]);
       }
 
@@ -58,13 +70,10 @@ module.exports = (oauthGoogle, req, res, next) => {
         about,
         firstname,
         lastname,
-        categories: [
-          {
-            categoryName,
-          },
-        ],
+        categories: [categoryName],
       });
 
+      speaker.avatar = `${speaker._id}${avatarExtend}`;
       user.speakerId = speaker._id;
 
       userDB = user;
@@ -74,9 +83,16 @@ module.exports = (oauthGoogle, req, res, next) => {
         user.active = true;
       }
 
+      const avatarArrayBuffer = base64.decode(avatar);
+      const avatarBuffer = arrayBufferToBuffer(avatarArrayBuffer);
+
       return Promise.all([
         user.save(),
         speaker.save(),
+        writeFile({
+          path: `../avatars/${speakerDB._id}${avatarExtend}`,
+          data: avatarBuffer,
+        }),
       ])
     })
     .then((documents) => {

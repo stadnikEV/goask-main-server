@@ -19,6 +19,7 @@
   },
   "adminEmail": "stadnik24fps@gmail.com",
   "numberPagesInSession": "5",
+  "numberPagesInSpeaker": "1",
   "maxRequestInterval": "4500",
   "downloadVideoPath": "../video",
   "sslPath": "../ssl",

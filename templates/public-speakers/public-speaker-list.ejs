@@ -1,0 +1,10 @@
+<div class="public-speakers-list"
+     data-component="public-speakers-list">
+  <% speakers.forEach(function(speaker){ %>
+    <div class="public-speakers-list__item-container"
+         data-element="public-speakers-list__item-container"
+         data-speakerId="<%=speaker.speakerId%>">
+      <% include public-speaker-item %>
+    </div>
+  <% }); %>
+</div>

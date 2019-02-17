@@ -1,0 +1,36 @@
+<div class="public-speaker-list-item"
+     data-component="public-speaker-list-item">
+
+  <div class="public-speaker-list-item__navigation"
+       data-element="public-speaker-list-item__navigation">
+    <div class="public-speaker-list-item__button-speaker-details-container"
+         data-element="public-speaker-list-item__button-speaker-details-container"
+         data-speakerId="<%= speaker.speakerId %>">
+      <% include public-speaker-button-more-details %>
+    </div>
+  </div>
+
+  <div class="public-speaker-list-item__content"
+       data-element="public-speaker-list-item__content">
+
+    <div class="public-speaker-list-item__content-header"
+         data-element="public-speaker-list-item__content-header">
+      <p class="public-speaker-list-item__speaker">
+        <%= speaker.firstname %> <%= speaker.lastname %>
+      </p>
+      <p class="public-speaker-list-item__category">
+        <span>Категория:</span> <%= speaker.categoryName %>
+      </p>
+      <p class="public-speaker-list-item__expertise">
+        <span>Экспертность:</span> <%= speaker.expertise %>
+      </p>
+    </div>
+    <div class="public-speaker-list-item__describe-speaker-container hidden"
+         data-element="public-speaker-list-item__describe-speaker-container">
+      <textarea class="textarea-trim"
+                data-component="textarea-trim-describe-speaker">
+<%= speaker.about %>
+      </textarea>
+    </div>
+  </div>
+</div>

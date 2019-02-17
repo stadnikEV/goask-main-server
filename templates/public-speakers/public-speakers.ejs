@@ -1,0 +1,24 @@
+<section class="public-speakers"
+     data-component="public-speakers">
+  <div class="public-speakers__select-category-container">
+    <div class="public-speakers__select-category">
+      <div class="public-speakers__describe-category">
+        Категория
+      </div>
+      <div class="public-speakers__select-container"
+          data-element="public-speakers__select-container">
+      </div>
+    </div>
+  </div>
+
+  <div class="public-speakers__list-container"
+       data-element="public-speakers__list-container">
+    <% include public-speaker-list %>
+  </div>
+  <div class="public-speakers__page-navigation-container"
+       data-element="public-speakers__page-navigation-container">
+    <% if (pageNavigatioData) { %>
+      <% include ../public-speaker-page-navigation %>
+    <% } %>
+  </div>
+</section>

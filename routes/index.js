@@ -7,10 +7,15 @@ module.exports = ({ app, statusVideo }) => {
   app.get('/my-sessions', require('./my-sessions'));
   app.get('/confirm-user-email/:id', require('./confirm-user-email'));
 
-  app.get('/public-sessions',
+  // app.get('/public-sessions',
+  //   require('../middleware/routes/is-valid-category'),
+  //   require('../middleware/routes/is-valid-sessions-page-number'),
+  //   require('./public-sessions'));
+
+  app.get('/public-speakers',
     require('../middleware/routes/is-valid-category'),
-    require('../middleware/routes/is-valid-sessions-page-number'),
-    require('./public-sessions'));
+    require('../middleware/routes/is-valid-speakers-page-number'),
+    require('./public-speakers'));
 
   app.get('/public-sessions/:id',
     require('../middleware/routes/is-valid-session-id'),

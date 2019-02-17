@@ -1,0 +1,51 @@
+<div class="public-session-details"
+     data-component="public-session-details"
+     data-sessionId="<%= session.sessionId %>">
+
+  <div class="public-session-details__session-title-wraper">
+    <section class="public-session-details__session-title-container"
+             data-element="public-session-details__session-title-container">
+      <div class="session-title">
+        <h1 class="session-title__theme">
+          <%= session.theme %>
+        </h1>
+        <p class="session-title__category">
+          <span>Категория:</span> <%= session.categoryName %>
+        </p>
+        <p class="session-title__speaker">
+          <span>Спикер: </span> <%= session.speaker.firstname %> <%= session.speaker.lastname %>
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <section class="public-session-details__form-ask-question-container"
+           data-element="public-session-details__form-ask-question-container">
+  </section>
+
+
+  <section class="public-session-details__session-container"
+           data-element="public-session-details__session-container">
+    <div class="describe">
+      <h2 class="describe__title">
+        Описание сессии
+      </h2>
+      <p class="describe__main">
+        <%= session.describeSession %>
+      </p>
+    </div>
+  </section>
+
+  <section class="public-session-details__about-speaker-container"
+           data-element="public-session-details__about-speaker-container">
+    <div class="describe">
+      <h2 class="describe__title">
+        О спикере
+      </h2>
+      <p class="describe__main">
+        <%= session.speaker.about %>
+      </p>
+    </div>
+  </section>
+
+</div>

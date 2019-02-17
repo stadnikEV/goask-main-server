@@ -27,6 +27,7 @@ initAdmin()
     const app = express();
     app.set('port', port);
 
+    app.use(require('./middleware/send-http-error'));
     app.use(morgan('tiny'));
     app.use(bodyParser.json());
 
@@ -46,8 +47,6 @@ initAdmin()
       })
     );
 
-    app.use(require('./middleware/send-http-error'));
-
     require('./routes')({ app, statusVideo });
     require('./api')({ app, statusVideo, oauthGoogle });
 
@@ -66,6 +65,13 @@ initAdmin()
     */
 
     app.use((err, req, res, next) => {
+      if (err.message === 'request entity too large') { // bodyParser
+        res.sendHttpError(new HttpError({
+          status: 403,
+          message: 'request entity too large',
+        }));
+        return;
+      }
       if (res.headersSent) {
         logger.error(err.stack);
         return;

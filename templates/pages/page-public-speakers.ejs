@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="<%=paths.publicPathFrontEnd%>/css/publicSpeakers.css">
+</head>
+<body>
+	<div class="page"
+    	 data-component="page">
+		<div class="page__header-container"
+ 		     data-element="page__header-container">
+ 			<% include ../header %>
+ 		</div>
+		<main class="page__main-container"
+	        data-element="page__main-container">
+
+			<section class="page__main-block-container"
+			         data-element="page__main-block-container">
+				<% include ../main-block %>
+			</section>
+
+			<section class="page__public-speakers-container"
+			         data-element="page__public-speakers-container">
+			  <% include ../public-speakers/public-speakers %>
+			</section>
+
+		</main>
+	</div>
+	<script src="<%=paths.publicPathFrontEnd%>/js/publicSpeakers.js" type="text/javascript"></script>
+</body>
+</html>
